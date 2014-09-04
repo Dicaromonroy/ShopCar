@@ -8,7 +8,10 @@ package shopcar.repository;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import shopcar.util.MyDatabase;
+
 
 /**
  *
@@ -17,7 +20,7 @@ import javax.persistence.EntityManager;
  */
 public class JpaDAO<T> implements DAO<T>, Serializable
 {
-    private EntityManager em;
+    @Inject @MyDatabase private EntityManager em;
     private final Class<T> classe;
     
     public JpaDAO(Class<T> classe, EntityManager em)
@@ -39,11 +42,12 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     @Override
     public void save(T entity)
     {
+        if(!em.isOpen()) System.out.println("Ta fechado!");
         em.getTransaction().begin();
+        System.out.println("TRX active: " + em.getTransaction().isActive());
         em.persist(entity);
         em.getTransaction().commit();
         System.out.println("Cheguei aqui!");
-        if(!em.isOpen()) System.out.println("Ta fechado!");
     }
 
     @Override
@@ -60,22 +64,20 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     }
 
     @Override
-    public T getById(Class<T> classe, Long pk)
+    public T getById(Object pk)
     {
-        //return em.find(classe, pk);
-        throw new UnsupportedOperationException("Not supported yet.");
+        return em.find(this.classe, pk);
     }
 
     @Override
-    public List<T> getAll(Class<T> classe)
+    public List<T> getAll()
     {
-        //List<T> resultList = (List<T>) em.createQuery("select e from " + classe.getSimpleName() + " e").getResultList();
-        //return resultList;
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<T> resultList = (List<T>) em.createQuery("select e from " + classe.getSimpleName() + " e").getResultList();
+        return resultList;
     }
 
     @Override
-    public T getByRestriction(Class<T> classe, String attribute, String filter)
+    public T getByRestriction(String attribute, String filter)
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

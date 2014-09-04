@@ -6,19 +6,21 @@
 
 package shopcar;
 
+import javax.enterprise.event.Observes;
+import javax.inject.Inject;
+import org.jboss.weld.environment.se.events.ContainerInitialized;
+import shopcar.view.Principal;
+
 /**
  *
  * @author Vitor Freitas
  */
 public class ShopCar
 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args)
+    @Inject private Principal newShopCar;
+    public void execute(@Observes ContainerInitialized init)
     {
-        // TODO code application logic here
+        for (int i = 0; i < 40; ++i) System.out.println();
+        this.newShopCar.MenuPrincipal();
     }
-    
 }

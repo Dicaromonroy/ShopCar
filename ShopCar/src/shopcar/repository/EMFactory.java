@@ -6,6 +6,7 @@
 
 package shopcar.repository;
 
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -29,11 +30,14 @@ public class EMFactory
     @MyDatabase
     public EntityManager createEM()
     {
-        return factory.createEntityManager();
+        EntityManager em;
+        em = factory.createEntityManager();
+        if(em.isOpen()) System.out.println("Esta aberta - entitymanager Producer");
+        return em;
     }
     
-    public void closeEntityManager(@Disposes @MyDatabase EntityManager em)
-    {
-        em.close();
-    }
+//    public void closeEntityManager(@Disposes @MyDatabase EntityManager em)
+//    {
+//        em.close();
+//    }
 }

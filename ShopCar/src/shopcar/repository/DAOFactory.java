@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import shopcar.util.MyDatabase;
 
 
+
 /**
  *
  * @author info1
@@ -28,7 +29,8 @@ public class DAOFactory<T>
     public JpaDAO<T> createJpaDAO(InjectionPoint injectionPoint) throws ClassNotFoundException 
     {    
         ParameterizedType type = (ParameterizedType) injectionPoint.getType();    
-        Class classe = (Class) type.getActualTypeArguments()[0];    
-        return new JpaDAO(classe,em);    
+        Class classe = (Class) type.getActualTypeArguments()[0];   
+        if(em.isOpen()) System.out.println("Continua Aberta!!! - entitymanager daofactory");
+        return new JpaDAO<>(classe,em);    
     }    
 }

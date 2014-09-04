@@ -7,15 +7,24 @@
 package shopcar.util;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 import javax.enterprise.inject.Produces;
 
 /**
  *
  * @author info1
+ * @param <T>
  */
-public class UtilFactory
+public class UtilFactory<T>
 {
+    @Produces
+    public Set<T> createSet()
+    {
+        return new HashSet<>();
+    }
+    
     @Produces
     public static Scanner createScaner()
     {
@@ -23,7 +32,7 @@ public class UtilFactory
     }
     
     @Produces
-    public ArrayList<String> createArrayString()
+    public ArrayList<T> createArrayString()
     {
         return new ArrayList<>();
     }

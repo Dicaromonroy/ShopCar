@@ -6,6 +6,7 @@
 
 package shopcar.repository;
 
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -22,9 +23,9 @@ public interface DAO<T>
     
     public void remove(T entity);
     
-    public T getById(Class<T> classe, Long pk);
+    public T getById(Object pk);
     
-    public List<T> getAll(Class<T> classe);
+    public List<T> getAll();
     
-    public T getByRestriction(Class<T> classe, String attribute, String filter);
+    public T getByRestriction(String attribute, String filter);
 }
