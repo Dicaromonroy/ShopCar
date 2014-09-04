@@ -15,6 +15,7 @@ import javax.enterprise.inject.Produces;
 
 import javax.inject.*;
 import org.jboss.weld.environment.se.events.ContainerInitialized; 
+import shopcar.repository.JpaDAO;
 
 
 
@@ -25,15 +26,13 @@ import org.jboss.weld.environment.se.events.ContainerInitialized;
 @ApplicationScoped
 public class Principal
 {
-    @Inject private FuncionarioDAO daoF;
-    @Inject private Funcionario f;
+
     @Inject private Scanner s;
     
     @Inject private Veiculo v;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
     
-    @Inject private Validator<Veiculo> valida; 
     
     @Inject private JpaDAO<Veiculo> dao;
     
