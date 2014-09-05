@@ -7,24 +7,20 @@
 package shopcar.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import javax.enterprise.inject.Produces;
+import shopcar.view.CadastroVeiculo;
 
 /**
  *
  * @author info1
  * @param <T>
  */
-public class UtilFactory<T>
-{
-    @Produces
-    public Set<T> createSet()
-    {
-        return new HashSet<>();
-    }
-    
+public class UtilFactory<T,I>
+{  
     @Produces
     public static Scanner createScaner()
     {
@@ -32,6 +28,7 @@ public class UtilFactory<T>
     }
     
     @Produces
+    @MyArrayList
     public ArrayList<T> createArrayString()
     {
         return new ArrayList<>();
@@ -41,5 +38,11 @@ public class UtilFactory<T>
     public StringBuilder createStringBuilder()
     {
         return new StringBuilder();
+    }
+    
+    @Produces
+    public HashMap createHash()
+    {
+        return new HashMap<>();
     }
 }

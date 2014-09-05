@@ -8,9 +8,6 @@ package shopcar.model;
 
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 /**
@@ -18,6 +15,8 @@ import javax.validation.constraints.*;
  * @author info1
  */
 @Entity
+@NamedQuery(name = "Veiculo.listAllVeiculosTypes",
+            query= "SELECT DISTINCT v.class FROM Veiculo v")
 @Inheritance
 @DiscriminatorColumn(name = "tipo_veiculo")
 public class Veiculo implements Serializable 

@@ -6,9 +6,18 @@
 
 package shopcar.view;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import javax.inject.Inject;
-import shopcar.model.Veiculo;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
+import javax.persistence.RollbackException;
+import shopcar.model.*;
 import shopcar.repository.JpaDAO;
+import shopcar.util.MyArrayList;
+import shopcar.util.MyTuple;
 
 /**
  *
@@ -17,6 +26,12 @@ import shopcar.repository.JpaDAO;
 public class CadastroVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoCadastro;
+    @Inject private Map<Integer,MyTuple<String, Veiculo>> veiculosMap;
+    @Inject private Scanner sCad;
+    @Inject private Moto moto;
+    @Inject @MyArrayList private List<String> tipoVeiculos;
+    
+    public CadastroVeiculo() { }
     
     public void saveVeiculo()
     {
@@ -24,9 +39,52 @@ public class CadastroVeiculo
         System.out.println("-------------------------------");
         System.out.println(" **Cadastro de um novo Veiculo**");
         System.out.println("");
-        System.out.println("Tipo de Veiculo(l[ENTER] para listar todos) : ");
+        System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
+        System.out.println("-------------------------------");
+        testIfNeedToListVeiculos();
+        
+        try
+        {
+            System.out.println("Entre com a placa do Veiculo: ");
+            moto.setPlaca(sCad.nextLine());
+            moto.setModelo("aaaa");
+            moto.setNomealgo("sasad");
+            daoCadastro.save(moto);
+        } 
+        catch(Exception ex)
+        {
+            System.out.println(ex.getClass());
+        }
     }
     
-    
+    public String testIfNeedToListVeiculos()
+    {
+        StringBuilder sb = new StringBuilder();
+        String test = sCad.nextLine();
+        if(test.equalsIgnoreCase("-l"))
+        {
+            tipoVeiculos = daoCadastro.getEntityManager().createNamedQuery("Veiculo.listAllVeiculosTypes", String.class)
+                    .getResultList();
+            for(String s : tipoVeiculos)
+                sb.append(s).append("\t");
+            return sb.toString();
+        }
+        else
+        {
+            for(String s : tipoVeiculos)
+            {
+                if(s.equalsIgnoreCase(test))
+                {
+                    System.out.println("Deseja incluir um novo Tipo de Veiculo?[s/n]");
+                    if(!sCad.nextLine().equalsIgnoreCase("s"))
+                    {
+                        System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
+                        testIfNeedToListVeiculos();
+                    }
+                }
+            }
+            return test;
+        }  
+    }
     
 }

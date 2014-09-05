@@ -16,6 +16,7 @@ import javax.validation.ValidatorFactory;
 /**
  *
  * @author info1
+ * @param <T>
  */
 public class Validator<T>
 {   

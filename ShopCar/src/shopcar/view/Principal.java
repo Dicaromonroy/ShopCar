@@ -28,9 +28,8 @@ import shopcar.util.*;
 public class Principal
 {
     @Inject private Util util;
-    
+    @Inject CadastroVeiculo cadastroVeiculo;
     @Inject private Moto m;
-    @Inject private List<Veiculo> veiculos;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
     
@@ -55,7 +54,7 @@ public class Principal
         
         try
         {
-            if(util.testInput(1,5) == 1) MenuPrincipal();
+            nextMenu("menuprincipal",util.testInput(1,5));
         } 
         catch (Exception e)
         {
@@ -67,7 +66,15 @@ public class Principal
     
     public void nextMenu(String from,int escolha)
     {
-        
+        if(from.equalsIgnoreCase("menuprincipal"))
+        {
+            switch(escolha)
+            {
+                case 1: 
+                    cadastroVeiculo.saveVeiculo();
+                
+            }
+        }
     }
     
     public int MenuDeListagem()
