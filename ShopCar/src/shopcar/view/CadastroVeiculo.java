@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import javax.inject.Inject;
+import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
-import javax.persistence.RollbackException;
+import shopcar.controller.Validator;
 import shopcar.model.*;
 import shopcar.repository.JpaDAO;
 import shopcar.util.MyArrayList;
@@ -30,6 +31,7 @@ public class CadastroVeiculo
     @Inject private Scanner sCad;
     @Inject private Moto moto;
     @Inject @MyArrayList private List<String> tipoVeiculos;
+    @Inject private Validator<Veiculo> validaVeiculo;
     
     public CadastroVeiculo() { }
     
@@ -53,7 +55,10 @@ public class CadastroVeiculo
         } 
         catch(Exception ex)
         {
-            System.out.println(ex.getClass());
+            if(ex.getCause() instanceof ConstraintViolationException)
+            {
+                System.out.println(validaVeiculo.Validate(moto));
+            }
         }
     }
     
