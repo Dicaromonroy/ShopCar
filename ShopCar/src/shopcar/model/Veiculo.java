@@ -18,6 +18,8 @@ import javax.validation.constraints.*;
  * @author info1
  */
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "tipo_veiculo")
 public class Veiculo implements Serializable 
 {
     @Id

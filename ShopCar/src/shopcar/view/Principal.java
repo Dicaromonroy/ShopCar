@@ -6,20 +6,17 @@
 
 package shopcar.view;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 
 import javax.inject.*;
-import org.jboss.weld.environment.se.events.ContainerInitialized; 
+import org.jboss.weld.environment.se.events.ContainerInitialized;
 import shopcar.controller.*;
 import shopcar.model.*;
 import shopcar.repository.JpaDAO;
+import shopcar.util.*;
 
 
 
@@ -30,10 +27,9 @@ import shopcar.repository.JpaDAO;
 @ApplicationScoped
 public class Principal
 {
-    @Inject private Scanner s;
+    @Inject private Util util;
     
-    @Inject private Veiculo v;
-    @Inject private Veiculo vi;
+    @Inject private Moto m;
     @Inject private List<Veiculo> veiculos;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
@@ -42,9 +38,12 @@ public class Principal
     
     @Inject private JpaDAO<Veiculo> dao;
     
-    public int MenuPrincipal()
+    public Principal() { }
+    
+    public void MenuPrincipal()
     {
-        System.out.println("*** ShopCar ***");
+        for (int i = 0; i < 40; ++i) System.out.println();
+        System.out.println("         *** ShopCar ***");
         System.out.println("-------------------------------");
         System.out.println("1 - Cadastrar Veiculos");
         System.out.println("2 - Listar Veiculos");
@@ -54,8 +53,21 @@ public class Principal
         System.out.println("");
         System.out.println("Escolha a opção desejada: ");
         
+        try
+        {
+            if(util.testInput(1,5) == 1) MenuPrincipal();
+        } 
+        catch (Exception e)
+        {
+            util.clear();
+            System.out.println(e.getMessage());
+        }
         
-        return s.nextInt();
+    }
+    
+    public void nextMenu(String from,int escolha)
+    {
+        
     }
     
     public int MenuDeListagem()
@@ -63,29 +75,26 @@ public class Principal
         return 0;
     }
     
-    public boolean testaEntrada()
+    private boolean testId(Object id)
     {
-        if(!s.hasNext("[1-5]"))
-        {
-            System.out.println("Opção errada!");
-            clear();
-            MenuPrincipal();
-            return true;
-        }
-        else
-            return false;
-            
+        return true;
     }
     
-    public void clear() 
+    public void teste()
     {
         try
         {
-            Runtime.getRuntime().exec("cls");
-        } catch (IOException ex)
+            m.setPlaca("CBC-1243");
+            m.setModelo("aaaaaa");
+            m.setNomealgo("BLABVLA");
+            dao.save(m);
+        } 
+        catch (Exception e)
         {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(e.getStackTrace());
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
         }
+        
     }
-    
 }

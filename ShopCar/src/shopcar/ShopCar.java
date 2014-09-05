@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 import shopcar.view.Principal;
 
+
 /**
  *
  * @author Vitor Freitas
@@ -20,7 +21,6 @@ public class ShopCar
     @Inject private Principal newShopCar;
     public void execute(@Observes ContainerInitialized init)
     {
-        for (int i = 0; i < 40; ++i) System.out.println();
         this.newShopCar.MenuPrincipal();
     }
 }
