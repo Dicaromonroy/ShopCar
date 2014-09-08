@@ -30,7 +30,6 @@ public class DAOFactory<T>
     {    
         ParameterizedType type = (ParameterizedType) injectionPoint.getType();    
         Class classe = (Class) type.getActualTypeArguments()[0];   
-        if(em.isOpen()) System.out.println("Continua Aberta!!! - entitymanager daofactory");
         return new JpaDAO<>(classe,em);    
     }    
 }

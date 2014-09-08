@@ -30,10 +30,7 @@ public class EMFactory
     @MyDatabase
     public EntityManager createEM()
     {
-        EntityManager em;
-        em = factory.createEntityManager();
-        if(em.isOpen()) System.out.println("Esta aberta - entitymanager Producer");
-        return em;
+        return factory.createEntityManager();
     }
     
 //    public void closeEntityManager(@Disposes @MyDatabase EntityManager em)

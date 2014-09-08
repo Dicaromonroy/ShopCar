@@ -6,14 +6,11 @@
 
 package shopcar.view;
 
+import java.lang.reflect.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import javax.inject.Inject;
-import javax.persistence.RollbackException;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import shopcar.controller.Validator;
 import shopcar.model.*;
 import shopcar.repository.JpaDAO;
@@ -47,19 +44,32 @@ public class CadastroVeiculo
         
         try
         {
+            
+
             System.out.println("Entre com a placa do Veiculo: ");
             moto.setPlaca(sCad.nextLine());
+            
             moto.setModelo("aaaa");
+            
             moto.setNomealgo("sasad");
             daoCadastro.save(moto);
         } 
         catch(Exception ex)
         {
-            if(ex.getCause() instanceof ConstraintViolationException)
-            {
-                System.out.println(validaVeiculo.Validate(moto));
-            }
+
         }
+    }
+    
+    public boolean testSaveInput(Veiculo obj, String property)
+    {
+        String err = validaVeiculo.Validate(obj , property);
+        if(err != null) 
+        {
+            System.err.println(err);
+            return false;
+        }
+        else
+            return true;
     }
     
     public String testIfNeedToListVeiculos()

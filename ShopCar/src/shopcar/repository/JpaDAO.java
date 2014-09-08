@@ -45,12 +45,9 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     @Override
     public void save(T entity)
     {
-        if(!em.isOpen()) System.out.println("Ta fechado!");
         em.getTransaction().begin();
-        System.out.println("TRX active: " + em.getTransaction().isActive());
         em.persist(entity);
         em.getTransaction().commit();
-        System.out.println("Cheguei aqui!");
     }
 
     @Override

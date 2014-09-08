@@ -21,7 +21,6 @@ import javax.validation.ValidatorFactory;
 public class Validator<T>
 {   
    private static javax.validation.Validator validator;
-   @Inject private StringBuilder sBuilder;
 
     public Validator()
     {
@@ -31,7 +30,7 @@ public class Validator<T>
     
     public String Validate(T entity)
     {
-        
+        StringBuilder sBuilder = new StringBuilder();
         Set<ConstraintViolation<T>> violations = validator.validate(entity);
         if (!violations.isEmpty()) 
         {
@@ -40,7 +39,7 @@ public class Validator<T>
             {
                 sBuilder.append(violation.getMessage()).append("\n");
             }
-            return this.sBuilder.toString();
+            return sBuilder.toString();
         }
         else
             return null;
@@ -48,6 +47,7 @@ public class Validator<T>
     
     public String Validate(T entity, String property)
     {
+        StringBuilder sBuilder = new StringBuilder();
         Set<ConstraintViolation<T>> violations = validator.validateProperty(entity, property);
         if(!violations.isEmpty())
         {
@@ -55,7 +55,7 @@ public class Validator<T>
             {
                 sBuilder.append(violation.getMessage());
             }
-            return this.sBuilder.toString();
+            return sBuilder.toString();
         }
         else
             return null;
