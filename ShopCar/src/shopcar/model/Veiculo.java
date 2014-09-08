@@ -15,8 +15,17 @@ import javax.validation.constraints.*;
  * @author info1
  */
 @Entity
-@NamedQuery(name = "Veiculo.listAllVeiculosTypes",
-            query= "SELECT DISTINCT v.class FROM Veiculo v")
+@NamedQueries({
+    @NamedQuery(name = "Veiculo.listAllVeiculosTypes",
+            query= "SELECT DISTINCT v.class FROM Veiculo v"),
+    @NamedQuery(name = "Veiculo.listAllVeiculoModelos",
+            query = "SELECT v.modelo FROM Veiculo v"),
+//    @NamedQuery(name = "Veiculo.listAllVeiculoMarcas",
+//            query = "SELECT v.marca FROM Veiculo v"),
+//    @NamedQuery(name = "Veiculo.listAllVeiculoCores",
+//            query = "SELECT v.cor FROM Veiculo v")
+})
+
 @Inheritance
 @DiscriminatorColumn(name = "tipo_veiculo")
 public class Veiculo implements Serializable 

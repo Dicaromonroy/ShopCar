@@ -44,21 +44,33 @@ public class CadastroVeiculo
         
         try
         {
+            //inputMaker(moto, "Entre com a Placa do Veiculo: ", "Placa");
+            inputPlaca();
+            inputModelo();
             
-
-            System.out.println("Entre com a placa do Veiculo: ");
-            moto.setPlaca(sCad.nextLine());
-            
-            moto.setModelo("aaaa");
-            
-            moto.setNomealgo("sasad");
-            daoCadastro.save(moto);
         } 
         catch(Exception ex)
         {
-
+            System.err.println(ex.getCause());
+            System.err.println(ex.getMessage());
+            for(StackTraceElement e : ex.getStackTrace()) System.err.println(e);
+            System.err.println(ex.getLocalizedMessage());
+            for(Throwable t : ex.getSuppressed()) System.err.println(t);
         }
     }
+
+    public void inputMaker(Veiculo obj, String string, String property) throws NoSuchMethodException, IllegalAccessException, 
+            IllegalArgumentException, InvocationTargetException
+    {
+        String err;
+        System.out.println(string);
+        String test = "sadasdads";
+        Method method = obj.getClass().getSuperclass().getMethod("set" + property, Object.class);
+        method.invoke(obj, test);
+        if(!testSaveInput(obj, property)) inputMaker(obj, string, property);
+    }
+    
+    
     
     public boolean testSaveInput(Veiculo obj, String property)
     {
@@ -72,6 +84,23 @@ public class CadastroVeiculo
             return true;
     }
     
+    public void inputPlaca()
+    {
+        System.out.println("Entre com a Placa do Veiculo: ");
+        //String test = testIfNeedToListVeiculos();
+        //if(test == null) inputPlaca();
+        moto.setPlaca(sCad.nextLine());// substituir sCad.nextLine() por test
+        if(!testSaveInput(moto, "placa")) inputPlaca();
+    }
+    
+    public void inputModelo()
+    {
+        System.out.println("Entre com o Modelo do Veiculo: ");
+        moto.setModelo(sCad.nextLine());
+        if(!testSaveInput(moto, "modelo")) inputPlaca();
+    }
+    
+    
     public String testIfNeedToListVeiculos()
     {
         StringBuilder sb = new StringBuilder();
@@ -84,22 +113,7 @@ public class CadastroVeiculo
                 sb.append(s).append("\t");
             return sb.toString();
         }
-        else
-        {
-            for(String s : tipoVeiculos)
-            {
-                if(s.equalsIgnoreCase(test))
-                {
-                    System.out.println("Deseja incluir um novo Tipo de Veiculo?[s/n]");
-                    if(!sCad.nextLine().equalsIgnoreCase("s"))
-                    {
-                        System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
-                        testIfNeedToListVeiculos();
-                    }
-                }
-            }
-            return test;
-        }  
+        return null;
     }
     
 }
