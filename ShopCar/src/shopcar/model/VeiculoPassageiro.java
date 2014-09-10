@@ -4,19 +4,16 @@
  * and open the template in the editor.
  */
 
-package veiculo.moto;
+package veiculo;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
-import veiculo.Veiculo;
 
 /**
  *
- * @author Mandy Grimm
+ * @author Aluno
  */
 @Entity
-public class Moto extends Veiculo implements Serializable
+public class VeiculoPassageiro extends Veiculo
 {
-    
+    private Integer numAssentos;
 }
-
