@@ -14,8 +14,7 @@ import javax.inject.Inject;
 import shopcar.controller.Validator;
 import shopcar.model.*;
 import shopcar.repository.JpaDAO;
-import shopcar.util.MyArrayList;
-import shopcar.util.MyTuple;
+import shopcar.util.*;
 
 /**
  *
@@ -24,13 +23,26 @@ import shopcar.util.MyTuple;
 public class CadastroVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoCadastro;
-    @Inject private Map<Integer,MyTuple<String, Veiculo>> veiculosMap;
+    @Inject private Map<Veiculo, String> veiculosMap;
     @Inject private Scanner sCad;
-    @Inject private Moto moto;
+    @Inject @VeiculosType(VeiculoTypes.MOTO) private Veiculo moto;
+    @Inject @VeiculosType(VeiculoTypes.CARRO) private Veiculo carro;
+    @Inject @VeiculosType(VeiculoTypes.ONIBUS) private Veiculo onibus;
+    @Inject @VeiculosType(VeiculoTypes.CAMINHAO) private Veiculo caminhao;
+    @Inject @VeiculosType(VeiculoTypes.CAMINHONETE) private Veiculo caminhonete;
     @Inject @MyArrayList private List<String> tipoVeiculos;
     @Inject private Validator<Veiculo> validaVeiculo;
     
     public CadastroVeiculo() { }
+    
+    public void load()
+    {
+        veiculosMap.put(moto,"Moto");
+        veiculosMap.put(carro,"Carro");
+        veiculosMap.put(onibus, "Onibus");
+        veiculosMap.put(caminhao,"Caminhao" );
+        veiculosMap.put(caminhonete, "Caminhonete");
+    }
     
     public void saveVeiculo()
     {
@@ -38,18 +50,14 @@ public class CadastroVeiculo
         System.out.println("-------------------------------");
         System.out.println(" **Cadastro de um novo Veiculo**");
         System.out.println("");
-        System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
-        System.out.println("-------------------------------");
+        load();
         testIfNeedToListVeiculos();
         
         try
         {
-            //inputMaker(moto, "Entre com a Placa do Veiculo: ", "Placa");
-            inputPlaca();
-            inputModelo();
-            
+            inputMaker(moto, "Entre com a Placa do Veiculo: ", "Placa");  
         } 
-        catch(Exception ex)
+        catch(Throwable ex)
         {
             System.err.println(ex.getCause());
             System.err.println(ex.getMessage());
@@ -64,10 +72,10 @@ public class CadastroVeiculo
     {
         String err;
         System.out.println(string);
-        String test = "sadasdads";
-        Method method = obj.getClass().getSuperclass().getMethod("set" + property, Object.class);
+        String test = sCad.nextLine();
+        Method method = obj.getClass().getSuperclass().getDeclaredMethod("set" + property, String.class);
         method.invoke(obj, test);
-        if(!testSaveInput(obj, property)) inputMaker(obj, string, property);
+        if(!testSaveInput(obj, property.toLowerCase())) inputMaker(obj, string, property);
     }
     
     
@@ -84,34 +92,29 @@ public class CadastroVeiculo
             return true;
     }
     
-    public void inputPlaca()
-    {
-        System.out.println("Entre com a Placa do Veiculo: ");
-        //String test = testIfNeedToListVeiculos();
-        //if(test == null) inputPlaca();
-        moto.setPlaca(sCad.nextLine());// substituir sCad.nextLine() por test
-        if(!testSaveInput(moto, "placa")) inputPlaca();
-    }
-    
-    public void inputModelo()
-    {
-        System.out.println("Entre com o Modelo do Veiculo: ");
-        //moto.setModelo(sCad.nextLine());
-        if(!testSaveInput(moto, "modelo")) inputModelo();
-    }
+//    public void inputPlaca()
+//    {
+//        System.out.println("Entre com a Placa do Veiculo: ");
+//        //String test = testIfNeedToListVeiculos();
+//        //if(test == null) inputPlaca();
+//        moto.setPlaca(sCad.nextLine());// substituir sCad.nextLine() por test
+//        if(!testSaveInput(moto, "placa")) inputPlaca();
+//    }
     
     
-    public String testIfNeedToListVeiculos()
+    public Veiculo testIfNeedToListVeiculos()
     {
-        StringBuilder sb = new StringBuilder();
+        System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
         String test = sCad.nextLine();
         if(test.equalsIgnoreCase("-l"))
         {
-            tipoVeiculos = daoCadastro.getEntityManager().createNamedQuery("Veiculo.listAllVeiculosTypes", String.class)
-                    .getResultList();
-            for(String s : tipoVeiculos)
-                sb.append(s).append("\t");
-            return sb.toString();
+            System.out.println("-------------------------------");
+            for(String s : veiculosMap.values())
+            {
+                System.out.print(s);
+            }
+            System.out.println("-------------------------------");
+            testIfNeedToListVeiculos();
         }
         return null;
     }

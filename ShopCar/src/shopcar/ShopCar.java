@@ -21,5 +21,6 @@ public class ShopCar
     public void execute(@Observes ContainerInitialized init)
     {
         this.newShopCar.MenuPrincipal();
+        //this.newShopCar.teste();
     }
 }

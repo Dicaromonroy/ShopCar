@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import shopcar.util.MyDatabase;
+import shopcar.util.Transacional;
 
 
 /**
@@ -43,6 +44,7 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     }
     
     @Override
+    @Transacional
     public void save(T entity)
     {
         em.getTransaction().begin();

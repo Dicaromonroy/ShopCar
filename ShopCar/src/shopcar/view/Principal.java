@@ -61,7 +61,6 @@ public class Principal
             util.clear();
             System.out.println(e.getMessage());
         }
-        
     }
     
     public void nextMenu(String from,int escolha)
@@ -91,14 +90,14 @@ public class Principal
     {
         try
         {
-            m.setPlaca("CBC-1243");
+            m.setPlaca("CTC-1243");
             //m.setModelo("aaaaaa");
             //m.setNomealgo("BLABVLA");
             dao.save(m);
         } 
         catch (Exception e)
         {
-            System.out.println(e.getStackTrace());
+            System.out.println(e.getCause());
             System.out.println(e.getMessage());
             System.out.println(e.getLocalizedMessage());
         }

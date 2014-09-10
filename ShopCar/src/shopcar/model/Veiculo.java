@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -33,8 +34,8 @@ import javax.persistence.*;
 public class Veiculo implements Serializable
 {
     @Id
-    //@Pattern(regexp = "[A-Z]{3}-\\d{4}", message = 
-            //"A Placa deve obedecer o formato ABC-1234!")
+    @Pattern(regexp = "[A-Z]{3}-\\d{4}", message = 
+            "A Placa deve obedecer o formato ABC-1234!")
     private String placa;
     private String chassi;
     @Temporal(TemporalType.DATE)
