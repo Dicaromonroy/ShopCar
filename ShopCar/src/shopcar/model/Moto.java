@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
-package veiculo.moto;
+package shopcar.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import veiculo.Veiculo;
+
 
 /**
  *

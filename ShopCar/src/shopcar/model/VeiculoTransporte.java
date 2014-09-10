@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package veiculo;
+package shopcar.model;
 
 import java.math.BigDecimal;
 import javax.persistence.Entity;

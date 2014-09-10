@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package veiculo;
+package shopcar.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -45,6 +45,7 @@ public class Veiculo implements Serializable
     private Integer cilindradas;
     private Integer numeroEixos;
     private Integer numeroMarchas;
+    private boolean vendido;
     @OneToOne
     private Cor cor;
     @OneToOne
@@ -54,164 +55,230 @@ public class Veiculo implements Serializable
 
     //<editor-fold defaultstate="collapsed" desc="Hash and Equals">
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.placa);
-        hash = 53 * hash + Objects.hashCode(this.chassi);
-        hash = 53 * hash + Objects.hashCode(this.anoFabricacao);
-        hash = 53 * hash + Objects.hashCode(this.quilometragem);
-        hash = 53 * hash + Objects.hashCode(this.valorVeiculo);
-        hash = 53 * hash + Objects.hashCode(this.potenciaCV);
-        hash = 53 * hash + Objects.hashCode(this.cilindradas);
-        hash = 53 * hash + Objects.hashCode(this.numeroEixos);
-        hash = 53 * hash + Objects.hashCode(this.numeroMarchas);
-        hash = 53 * hash + Objects.hashCode(this.cor);
-        hash = 53 * hash + Objects.hashCode(this.marca);
-        hash = 53 * hash + Objects.hashCode(this.modelo);
+        hash = 67 * hash + Objects.hashCode(this.placa);
+        hash = 67 * hash + Objects.hashCode(this.chassi);
+        hash = 67 * hash + Objects.hashCode(this.anoFabricacao);
+        hash = 67 * hash + Objects.hashCode(this.quilometragem);
+        hash = 67 * hash + Objects.hashCode(this.valorVeiculo);
+        hash = 67 * hash + Objects.hashCode(this.potenciaCV);
+        hash = 67 * hash + Objects.hashCode(this.cilindradas);
+        hash = 67 * hash + Objects.hashCode(this.numeroEixos);
+        hash = 67 * hash + Objects.hashCode(this.numeroMarchas);
+        hash = 67 * hash + (this.vendido ? 1 : 0);
+        hash = 67 * hash + Objects.hashCode(this.cor);
+        hash = 67 * hash + Objects.hashCode(this.marca);
+        hash = 67 * hash + Objects.hashCode(this.modelo);
         return hash;
     }
-    
+
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (getClass() != obj.getClass())
+        {
             return false;
         }
         final Veiculo other = (Veiculo) obj;
-        if (!Objects.equals(this.placa, other.placa)) {
+        if (!Objects.equals(this.placa, other.placa))
+        {
             return false;
         }
-        if (!Objects.equals(this.chassi, other.chassi)) {
+        if (!Objects.equals(this.chassi, other.chassi))
+        {
             return false;
         }
-        if (!Objects.equals(this.anoFabricacao, other.anoFabricacao)) {
+        if (!Objects.equals(this.anoFabricacao, other.anoFabricacao))
+        {
             return false;
         }
-        if (!Objects.equals(this.quilometragem, other.quilometragem)) {
+        if (!Objects.equals(this.quilometragem, other.quilometragem))
+        {
             return false;
         }
-        if (!Objects.equals(this.valorVeiculo, other.valorVeiculo)) {
+        if (!Objects.equals(this.valorVeiculo, other.valorVeiculo))
+        {
             return false;
         }
-        if (!Objects.equals(this.potenciaCV, other.potenciaCV)) {
+        if (!Objects.equals(this.potenciaCV, other.potenciaCV))
+        {
             return false;
         }
-        if (!Objects.equals(this.cilindradas, other.cilindradas)) {
+        if (!Objects.equals(this.cilindradas, other.cilindradas))
+        {
             return false;
         }
-        if (!Objects.equals(this.numeroEixos, other.numeroEixos)) {
+        if (!Objects.equals(this.numeroEixos, other.numeroEixos))
+        {
             return false;
         }
-        if (!Objects.equals(this.numeroMarchas, other.numeroMarchas)) {
+        if (!Objects.equals(this.numeroMarchas, other.numeroMarchas))
+        {
             return false;
         }
-        if (!Objects.equals(this.cor, other.cor)) {
+        if (this.vendido != other.vendido)
+        {
             return false;
         }
-        if (!Objects.equals(this.marca, other.marca)) {
+        if (!Objects.equals(this.cor, other.cor))
+        {
             return false;
         }
-        if (!Objects.equals(this.modelo, other.modelo)) {
+        if (!Objects.equals(this.marca, other.marca))
+        {
+            return false;
+        }
+        if (!Objects.equals(this.modelo, other.modelo))
+        {
             return false;
         }
         return true;
     }
+    
+    
 //</editor-fold>
    
     //<editor-fold defaultstate="collapsed" desc="Gets and Sets">
-    public Cor getCor() {
+    public Cor getCor() 
+    {
         return cor;
     }
-    public void setCor(Cor cor) {
+    public void setCor(Cor cor) 
+    {
         this.cor = cor;
     }
     public Marca getMarca() {
         return marca;
     }
     
-    public void setMarca(Marca marca) {
+    public void setMarca(Marca marca) 
+    {
         this.marca = marca;
     }
-    public Modelo getModelo() {
+    public Modelo getModelo()
+    {
         return modelo;
     }
     
-    public void setModelo(Modelo modelo) {
+    public void setModelo(Modelo modelo) 
+    {
         this.modelo = modelo;
     }
-    public String getPlaca() {
+    public String getPlaca() 
+    {
         return placa;
     }
     
-    public void setPlaca(String placa) {
+    public void setPlaca(String placa) 
+    {
         this.placa = placa;
     }
     
-    public String getChassi() {
+    public String getChassi() 
+    {
         return chassi;
     }
     
-    public void setChassi(String chassi) {
+    public void setChassi(String chassi) 
+    {
         this.chassi = chassi;
     }
 
-    public Date getAnoFabricacao() {
+    public Date getAnoFabricacao() 
+    {
         return anoFabricacao;
     }
     
-    public void setAnoFabricacao(Date anoFabricacao) {
+    public void setAnoFabricacao(Date anoFabricacao) 
+    {
         this.anoFabricacao = anoFabricacao;
     }
     
-    public Integer getQuilometragem() {
+    public Integer getQuilometragem() 
+    {
         return quilometragem;
     }
     
-    public void setQuilometragem(Integer quilometragem) {
+    public void setQuilometragem(Integer quilometragem) 
+    {
         this.quilometragem = quilometragem;
     }
     
-    public BigDecimal getValorVeiculo() {
+    public BigDecimal getValorVeiculo() 
+    {
         return valorVeiculo;
     }
     
-    public void setValorVeiculo(BigDecimal valorVeiculo) {
+    public void setValorVeiculo(BigDecimal valorVeiculo) 
+    {
         this.valorVeiculo = valorVeiculo;
     }
     
-    public Integer getPotenciaCV() {
+    public Integer getPotenciaCV()
+    {
         return potenciaCV;
     }
     
-    public void setPotenciaCV(Integer potenciaCV) {
+    public void setPotenciaCV(Integer potenciaCV)
+    {
         this.potenciaCV = potenciaCV;
     }
     
-    public Integer getCilindradas() {
+    public Integer getCilindradas() 
+    {
         return cilindradas;
     }
     
-    public void setCilindradas(Integer cilindradas) {
+    public void setCilindradas(Integer cilindradas) 
+    {
         this.cilindradas = cilindradas;
     }
     
-    public Integer getNumeroEixos() {
+    public Integer getNumeroEixos() 
+    {
         return numeroEixos;
     }
     
-    public void setNumeroEixos(Integer numeroEixos) {
+    public void setNumeroEixos(Integer numeroEixos) 
+    {
         this.numeroEixos = numeroEixos;
     }
     
-    public Integer getNumeroMarchas() {
+    public Integer getNumeroMarchas() 
+    {
         return numeroMarchas;
     }
     
-    public void setNumeroMarchas(Integer numeroMarchas) {
+    public void setNumeroMarchas(Integer numeroMarchas) 
+    {
         this.numeroMarchas = numeroMarchas;
     }
+    
+    /**
+     * @return the vendido
+     */
+    public boolean isVendido()
+    {
+        return vendido;
+    }
+
+    /**
+     * @param vendido the vendido to set
+     */
+    public void setVendido(boolean vendido)
+    {
+        this.vendido = vendido;
+    }
+    
 //</editor-fold>
+
+    
+
     
 }

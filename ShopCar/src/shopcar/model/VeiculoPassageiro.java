@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package veiculo;
+package shopcar.model;
 
 import javax.persistence.Entity;
 

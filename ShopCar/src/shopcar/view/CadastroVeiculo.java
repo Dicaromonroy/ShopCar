@@ -96,7 +96,7 @@ public class CadastroVeiculo
     public void inputModelo()
     {
         System.out.println("Entre com o Modelo do Veiculo: ");
-        moto.setModelo(sCad.nextLine());
+        //moto.setModelo(sCad.nextLine());
         if(!testSaveInput(moto, "modelo")) inputModelo();
     }
     

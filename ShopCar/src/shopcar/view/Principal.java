@@ -92,8 +92,8 @@ public class Principal
         try
         {
             m.setPlaca("CBC-1243");
-            m.setModelo("aaaaaa");
-            m.setNomealgo("BLABVLA");
+            //m.setModelo("aaaaaa");
+            //m.setNomealgo("BLABVLA");
             dao.save(m);
         } 
         catch (Exception e)

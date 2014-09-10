@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 
-package veiculo.caminhonete;
+package shopcar.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Objects;
 import javax.persistence.Entity;
-import veiculo.VeiculoTransporte;
+
 
 /**
  *
