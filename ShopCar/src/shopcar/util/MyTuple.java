@@ -6,36 +6,72 @@
 
 package shopcar.util;
 
+import java.util.Objects;
+
 /**
  *
  * @author info1
- * @param <T>
- * @param <I>
+ * @param <First>
+ * @param <Second>
  */
-public class MyTuple<T, I>
+public class MyTuple<First, Second>
 {
-    private final T t;
-    private final I i;
+    private final First first;
+    private final Second second;
     
-    public MyTuple(T t, I i)
+    public MyTuple(First t, Second i)
     {
-        this.t = t;
-        this.i = i;
+        this.first = t;
+        this.second = i;
     }
 
     /**
      * @return the t
      */
-    public T getT()
+    public First getFirst()
     {
-        return t;
+        return first;
     }
 
     /**
      * @return the i
      */
-    public I getI()
+    public Second getSecond()
     {
-        return i;
+        return second;
     }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.first);
+        hash = 67 * hash + Objects.hashCode(this.second);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final MyTuple<?, ?> other = (MyTuple<?, ?>) obj;
+        if (!Objects.equals(this.first, other.first))
+        {
+            return false;
+        }
+        if (!Objects.equals(this.second, other.second))
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
