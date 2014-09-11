@@ -89,19 +89,12 @@ public class Principal
     
     public void teste()
     {
-        try
-        {
-            m.setPlaca("CBC-1243");
-            //m.setModelo("aaaaaa");
-            //m.setNomealgo("BLABVLA");
-            dao.save(m);
-        } 
-        catch (Exception e)
-        {
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getMessage());
-            System.out.println(e.getLocalizedMessage());
-        }
+        String id = "ABC-1234";
+        ListagemVeiculo a = new ListagemVeiculo(id);
+        a.Teste();
+      /*  Veiculo v = dao.getById(id);
+        System.out.println(v.getChassi());*/
+        //a.teste();
         
     }
 }
