@@ -23,6 +23,7 @@ public class JpaDAO<T> implements DAO<T>, Serializable
 {
 	/* Here I inject the EntityManager, and get a new instance from EMFactory Producer method */
     @Inject @MyDatabase private EntityManager em;
+    
 	/* The class to be persist */
     private final Class<T> classe;
     

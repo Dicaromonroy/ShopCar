@@ -7,7 +7,10 @@
 package shopcar.view;
 
 import javax.enterprise.context.ApplicationScoped;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 981ac47570eeed7ea67322663c807dfffc527a98
 import javax.inject.*;
 import shopcar.controller.*;
 import shopcar.model.*;
@@ -28,7 +31,7 @@ public class Principal
     @Inject private Moto m;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
-    
+    @Inject private ListagemVeiculo listagem;
     @Inject private Validator<Veiculo> valida; 
     
     @Inject private JpaDAO<Veiculo> dao;
@@ -70,7 +73,8 @@ public class Principal
             {
                 case 1: 
                     cadastroVeiculo.saveVeiculo();
-                
+                case 2:
+                    listagem.pegarPlaca();
             }
         }
     }
@@ -86,6 +90,9 @@ public class Principal
     }
     
     public void teste()
+<<<<<<< HEAD
+    {    
+=======
     {
         try
         {
@@ -99,6 +106,7 @@ public class Principal
             System.out.println(e.getMessage());
             System.out.println(e.getLocalizedMessage());
         }
+>>>>>>> 981ac47570eeed7ea67322663c807dfffc527a98
         
     }
 }

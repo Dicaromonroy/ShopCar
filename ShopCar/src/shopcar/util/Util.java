@@ -34,4 +34,18 @@ public class Util
     {
         for (int i = 0; i < 40; ++i) System.out.println();
     }
+    
+    public String testaPlaca()
+    {
+        String placa;
+        if(s.hasNext("[A-Z]{3}-\\d{4}"))
+        {
+           placa = s.nextLine();
+            clear();
+            return placa;
+        }
+        else
+           System.out.println("Formato Errado!");
+           return null;
+    }
 }
