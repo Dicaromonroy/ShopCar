@@ -26,14 +26,8 @@ public class CadastroVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoCadastro;
     @Inject private Map<String,Veiculo> veiculoMap;
-    //@Inject private Map<Veiculo, String> veiculosMap;
-    //@Inject private Map<Integer, MyTuple<String,Veiculo>> veiculosMap;
+
     @Inject private Scanner sCad;
-    @Inject @VeiculosType(VeiculoTypes.MOTO) private Veiculo moto;
-    @Inject @VeiculosType(VeiculoTypes.CARRO) private Veiculo carro;
-//    @Inject @VeiculosType(VeiculoTypes.ONIBUS) private Veiculo onibus;
-//    @Inject @VeiculosType(VeiculoTypes.CAMINHAO) private Veiculo caminhao;
-//    @Inject @VeiculosType(VeiculoTypes.CAMINHONETE) private Veiculo caminhonete;
     @Inject @MyArrayList private List<String> tipoVeiculos;
     @Inject private Validator<Veiculo> validaVeiculo;
     
@@ -42,21 +36,11 @@ public class CadastroVeiculo
     
     public void load()
     {
-        veiculoMap.put("Moto", new Moto());
-        veiculoMap.put("Carro", new Carro());
-        veiculoMap.put("Onibus", new Onibus());
-        veiculoMap.put("Caminhao", new Caminhao());
-        veiculoMap.put("Caminhonete", new Caminhonete());
-//        veiculosMap.put(moto,"Moto");
-//        veiculosMap.put(carro,"Carro");
-//        veiculosMap.put(onibus, "Onibus");
-//        veiculosMap.put(caminhao,"Caminhao" );
-//        veiculosMap.put(caminhonete, "Caminhonete");
-//        veiculosMap.put(1, new MyTuple<>("Carro", carro));
-//        veiculosMap.put(2, new MyTuple<>("Moto", moto));
-//        veiculosMap.put(3, new MyTuple<>("Onibus", onibus));
-//        veiculosMap.put(4, new MyTuple<>("Caminhao", caminhao));
-//        veiculosMap.put(5, new MyTuple<>("Caminhonete", caminhonete));
+        tipoVeiculos.add("Carro");
+        tipoVeiculos.add("Moto");
+        tipoVeiculos.add("Onibus");
+        tipoVeiculos.add("Caminhao");
+        tipoVeiculos.add("Caminhonete");
     }
     
     public void saveVeiculo()
@@ -76,14 +60,21 @@ public class CadastroVeiculo
         
         try
         {
-            inputMaker(veiculo, "Entre com a Placa do Veiculo: ", "Placa", String.class, 1); 
-            System.out.println(veiculo.getPlaca());
+            inputMaker(veiculo, "Entre com a Placa do Veiculo: ", "Placa", String.class, 2); 
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com o Número de Chassi do Veiculo: ", "Chassi", String.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Quilometragem do Veiculo: ", "NumAssentos", Integer.class, 1);
+            
+            daoCadastro.save(veiculo);
+            System.out.println("@@@Salvo");
         } 
         catch(Exception ex)
         {
             System.err.println(ex.getCause());
             System.err.println(ex.getMessage());
             System.err.println(ex.getLocalizedMessage());
+            System.err.println("To no save");
         }
     }
 
@@ -94,20 +85,17 @@ public class CadastroVeiculo
         String err;
         System.out.println(question);
         String test = sCad.nextLine();
-        Veiculo clazz = obj;
-        System.out.println(clazz.getClass().getSimpleName());
+        Class clazz = obj.getClass();
         for(int i = 1; i <= methodInheritanceHierarchy; i++) 
-        {
-            
-        }
+            clazz = clazz.getSuperclass();
         try
         {
-            Method method = obj.getClass().getSuperclass().getSuperclass().getDeclaredMethod("set" + property, propertyClass);
-            method.invoke(obj, test);
+            Method method = clazz.getMethod("set" + property, propertyClass);
+            method.invoke(obj, new Object[] {test});
         } 
         catch (NoSuchMethodException e)
         {
-            System.err.println(e.getCause());
+            System.err.println(e.getMessage());
         }
         
         if(!testSaveInput(obj, property.toLowerCase())) 
@@ -126,11 +114,6 @@ public class CadastroVeiculo
             return true;
     }
     
-    public Object getSuperClass(Object obj)
-    {
-        return obj.getClass().getSuperclass();
-    }
-    
     public Veiculo testIfNeedToListVeiculos()
     {
         System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
@@ -138,30 +121,28 @@ public class CadastroVeiculo
         if(test.equalsIgnoreCase("-l"))
         {
             System.out.println("-------------------------------");
-            for(String s : veiculoMap.keySet())
+            for(String s : tipoVeiculos)
                 System.out.println(s);
             System.out.println("-------------------------------");
-            testIfNeedToListVeiculos();
+            return testIfNeedToListVeiculos();
         }
         else
         {
-            for(String s : veiculoMap.keySet())
+            for(String s : tipoVeiculos)
             {
                 if(test.equalsIgnoreCase(s))
-                {
+                {System.out.println("Estou aqui!" + test);
                     try
                     {
                         Object c = Class.forName("shopcar.model." + s)
                                 .newInstance();
                         return (Veiculo) c;
-                        
                     } 
                     catch (Exception e)
                     {
-                        System.err.println(e.getCause());
+                        System.err.println(e.getMessage());
                     }
-                }
-                    
+                }  
             }
         }
         return null;

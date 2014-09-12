@@ -24,8 +24,7 @@ import shopcar.util.*;
 public class Principal
 {
     @Inject private Util util;
-    @Inject CadastroVeiculo cadastroVeiculo;
-    @Inject private Moto m;
+    @Inject private CadastroVeiculo cadastroVeiculo;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
     
@@ -83,22 +82,5 @@ public class Principal
     private boolean testId(Object id)
     {
         return true;
-    }
-    
-    public void teste()
-    {
-        try
-        {
-            Veiculo v;
-            v = dao.getById("ABC-1234");
-            System.out.println(v.getPlaca());
-        } 
-        catch (Exception e)
-        {
-            System.out.println(e.getCause());
-            System.out.println(e.getMessage());
-            System.out.println(e.getLocalizedMessage());
-        }
-        
     }
 }
