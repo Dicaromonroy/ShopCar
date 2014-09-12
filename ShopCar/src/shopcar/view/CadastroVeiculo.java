@@ -87,13 +87,15 @@ public class CadastroVeiculo
         }
     }
 
-    public void inputMaker(Veiculo obj, String question, String property, Class propertyClass, Integer methodInheritanceHierarchy) throws  IllegalAccessException, 
-            IllegalArgumentException, InvocationTargetException
+    public void inputMaker(Veiculo obj, String question, String property, 
+            Class propertyClass, Integer methodInheritanceHierarchy) throws  
+            IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         String err;
         System.out.println(question);
         String test = sCad.nextLine();
-        
+        Veiculo clazz = obj;
+        System.out.println(clazz.getClass().getSimpleName());
         for(int i = 1; i <= methodInheritanceHierarchy; i++) 
         {
             
@@ -108,7 +110,8 @@ public class CadastroVeiculo
             System.err.println(e.getCause());
         }
         
-        if(!testSaveInput(obj, property.toLowerCase())) inputMaker(obj, question, property, propertyClass, methodInheritanceHierarchy);
+        if(!testSaveInput(obj, property.toLowerCase())) 
+            inputMaker(obj, question, property, propertyClass, methodInheritanceHierarchy);
     }
     
     public boolean testSaveInput(Veiculo obj, String property)

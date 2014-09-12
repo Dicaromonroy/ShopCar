@@ -8,7 +8,10 @@ package shopcar;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 import org.jboss.weld.environment.se.events.ContainerInitialized;
+import shopcar.view.Listagem;
 import shopcar.view.Principal;
 
 /**
@@ -18,9 +21,26 @@ import shopcar.view.Principal;
 public class ShopCar
 {
     @Inject private Principal newShopCar;
-    public void execute(@Observes ContainerInitialized init)
+//    public void execute(@Observes ContainerInitialized init)
+//    {
+//        Listagem l = new Listagem();
+//        l.teste();
+//        //this.newShopCar.teste();
+//    }
+    public void teste()
     {
-        this.newShopCar.MenuPrincipal();
-        //this.newShopCar.teste();
+        //Listagem l = new Listagem();
+        //l.teste();
+        this.newShopCar.teste();
+    }
+    
+    public static void main(String args[])
+    {
+        Weld weld = new Weld(); 
+        WeldContainer container = weld.initialize(); 
+
+        ShopCar bs = container.instance().select(ShopCar.class).get(); 
+        bs.teste(); 
+        weld.shutdown();
     }
 }

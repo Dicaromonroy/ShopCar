@@ -6,13 +6,9 @@
 
 package shopcar.view;
 
-import java.util.List;
-import java.util.Scanner;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
 
 import javax.inject.*;
-import org.jboss.weld.environment.se.events.ContainerInitialized;
 import shopcar.controller.*;
 import shopcar.model.*;
 import shopcar.repository.JpaDAO;
@@ -36,6 +32,9 @@ public class Principal
     @Inject private Validator<Veiculo> valida; 
     
     @Inject private JpaDAO<Veiculo> dao;
+
+    
+    
     
     public Principal() { }
     
@@ -90,10 +89,9 @@ public class Principal
     {
         try
         {
-            m.setPlaca("CTC-1243");
-            //m.setModelo("aaaaaa");
-            //m.setNomealgo("BLABVLA");
-            dao.save(m);
+            Veiculo v;
+            v = dao.getById("ABC-1234");
+            System.out.println(v.getPlaca());
         } 
         catch (Exception e)
         {

@@ -26,7 +26,8 @@ public class DAOFactory<T>
     
     @SuppressWarnings({ "rawtypes", "unchecked" })    
     @Produces
-    public JpaDAO<T> createJpaDAO(InjectionPoint injectionPoint) throws ClassNotFoundException 
+    public JpaDAO<T> createJpaDAO(InjectionPoint injectionPoint) throws 
+            ClassNotFoundException 
     {    
         ParameterizedType type = (ParameterizedType) injectionPoint.getType();    
         Class classe = (Class) type.getActualTypeArguments()[0];   
