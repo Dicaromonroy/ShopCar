@@ -7,10 +7,6 @@
 package shopcar.view;
 
 import javax.enterprise.context.ApplicationScoped;
-<<<<<<< HEAD
-=======
-
->>>>>>> 981ac47570eeed7ea67322663c807dfffc527a98
 import javax.inject.*;
 import shopcar.controller.*;
 import shopcar.model.*;
@@ -27,8 +23,7 @@ import shopcar.util.*;
 public class Principal
 {
     @Inject private Util util;
-    @Inject CadastroVeiculo cadastroVeiculo;
-    @Inject private Moto m;
+    @Inject private CadastroVeiculo cadastroVeiculo;
     @Inject private VendeCarro vendeCarro;
     @Inject private VeiculoController veiculoController;
     @Inject private ListagemVeiculo listagem;
@@ -73,8 +68,8 @@ public class Principal
             {
                 case 1: 
                     cadastroVeiculo.saveVeiculo();
-                case 2:
-                    listagem.pegarPlaca();
+                case 3:
+                    listagem.FichaVeiculo("ABC-1234");
             }
         }
     }
@@ -88,11 +83,7 @@ public class Principal
     {
         return true;
     }
-    
-    public void teste()
-<<<<<<< HEAD
-    {    
-=======
+    public void teste()    
     {
         try
         {
@@ -106,7 +97,6 @@ public class Principal
             System.out.println(e.getMessage());
             System.out.println(e.getLocalizedMessage());
         }
->>>>>>> 981ac47570eeed7ea67322663c807dfffc527a98
         
     }
 }

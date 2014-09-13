@@ -70,15 +70,31 @@ public class ListagemVeiculo
         System.out.println("-------------------------------");
         System.out.println("Entre com a placa desejada: ");
         placa = util.testaPlaca();
-        ListagemPlaca(placa);
+        FichaVeiculo(placa);
     }
     
-    public void ListagemPlaca(String placa)
+    public void FichaVeiculo(String placa)
     {
-        Veiculo v = new Veiculo();
-        daoListagem.getById(placa);
-        System.out.println("Placa do veículo desejado: " + v.getPlaca());
-        System.out.println("Marca do veículo desejado: " + v.getMarca());
+        Veiculo v;
+        v = daoListagem.getById(placa);
+        
+        System.out.println("     *** Ficha do Veículo ***    ");
+        System.out.println("---------------------------------");
+        System.out.println("| Placa do veículo: " + v.getPlaca());
+        System.out.println("| Marca: " + v.getMarca().getMarca());
+        System.out.println("| Modelo: " + v.getModelo().getModelo());
+        System.out.println("| Versão do modelo: " + v.getModelo().getVersao());
+        System.out.println("---------------------------------");
+        System.out.println("| Cor: " + v.getCor().getCor());
+        System.out.println("| Ano de Fabricação: " + v.getAnoFabricacao());
+        System.out.println("| Valor: " + v.getValorVeiculo());
+        System.out.println("---------------------------------");
+        System.out.println("| Chassi: " + v.getChassi());
+        System.out.println("| Cilindradas: " + v.getCilindradas());
+        System.out.println("| Número de Eixos: " + v.getNumeroEixos());
+        System.out.println("| Número de Marchas: " + v.getNumeroMarchas());
+        System.out.println("| Potência em CV: " + v.getPotenciaCV());
+        System.out.println("| Quilometragemo: " + v.getQuilometragem());
         
     }
 }
