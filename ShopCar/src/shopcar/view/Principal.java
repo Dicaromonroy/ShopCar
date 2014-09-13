@@ -68,6 +68,8 @@ public class Principal
             {
                 case 1: 
                     cadastroVeiculo.saveVeiculo();
+                case 2:
+                    listagem.ListarVeiculo();
                 case 3:
                     listagem.FichaVeiculo("ABC-1234");
             }

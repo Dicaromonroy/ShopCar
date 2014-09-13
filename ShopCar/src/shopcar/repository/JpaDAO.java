@@ -84,5 +84,13 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<T> getByRestriction(String namedQuery, String parameter, Object value)
+    {
+        List <T> resultList = (List<T>) em.createNamedQuery(namedQuery)
+                .setParameter("mod", value)
+                .getResultList();
+        return resultList;
+    }
 
 }
