@@ -6,6 +6,8 @@
 
 package shopcar.util;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import javax.inject.Inject;
 
@@ -17,10 +19,10 @@ public class Util
 {
     @Inject private Scanner s;
     
-    public int testInput(int a, int b) throws Exception
+    public int testInput(String pattern) throws Exception
     {   
         int test = 0;
-        if(s.hasNext("["+a+"-"+b+"]"))
+        if(s.hasNext(pattern))
         {
             test = s.nextInt();
             clear();
@@ -35,17 +37,24 @@ public class Util
         for (int i = 0; i < 40; ++i) System.out.println();
     }
     
-    public String testaPlaca()
+    public String testInputString(String pattern) throws Exception
     {
-        String placa;
-        if(s.hasNext("[A-Z]{3}-\\d{4}"))
+        String test;
+        if(s.hasNext(pattern))
         {
-           placa = s.nextLine();
+            test = s.nextLine();
             clear();
-            return placa;
+            return test;
         }
         else
-           System.out.println("Formato Errado!");
-           return null;
+           throw new Exception("Conteudo inválido!");
+    }
+    
+    public Date convertStringToDate(Integer year)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        Date date = calendar.getTime();
+        return date;
     }
 }

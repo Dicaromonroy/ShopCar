@@ -51,7 +51,7 @@ public class Principal
         
         try
         {
-            nextMenu("menuprincipal",util.testInput(1,5));
+            nextMenu("menuprincipal",util.testInput("[1-5]"));
         } 
         catch (Exception e)
         {
@@ -66,12 +66,15 @@ public class Principal
         {
             switch(escolha)
             {
-                case 1: 
-                    cadastroVeiculo.saveVeiculo();
+                //case 1: 
+                  //  cadastroVeiculo.saveVeiculo();
+                    //break;
                 case 2:
-                    listagem.ListarVeiculo();
-                case 3:
-                    listagem.FichaVeiculo("ABC-1234");
+                    listagem.listagemAno();
+                    break;
+                //case 3:
+                  //  listagem.pegarPlaca();
+                    //break;
             }
         }
     }
