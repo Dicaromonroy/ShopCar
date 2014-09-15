@@ -6,10 +6,6 @@
 
 package shopcar.util;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.YearDV;
-import java.time.Year;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Scanner;
 import javax.inject.Inject;
 
@@ -41,8 +37,9 @@ public class Util
     
     public String testInputString(String pattern) throws Exception
     {
-        String test;
-        if(s.hasNext(pattern))
+        String test = null;
+        //System.out.println("@@" + pattern);
+        if(s.hasNext())
         {
             test = s.nextLine();
             clear();

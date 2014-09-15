@@ -6,7 +6,6 @@
 
 package shopcar.view;
 
-import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import shopcar.model.*;
@@ -22,57 +21,10 @@ public class ListagemVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoListagem;
     private String idVeiculo;
+    @Inject private VeiculoRN vrn;
     @Inject private Util util;
     @Inject @MyArrayList private List<Veiculo> listados;
     private Veiculo v = new Veiculo();
-    
-    //<editor-fold defaultstate="collapsed" desc="Menu de Listagem">
-    public void listarVeiculo()
-    {
-        for (int i = 0; i < 40; ++i) System.out.println();
-        System.out.println("         *** ShopCar ***");
-        System.out.println("-------------------------------");
-        System.out.println("1 - Listar Veículos por Marca.");
-        System.out.println("2 - Listar Veículos por Modelo.");
-        System.out.println("3 - Listar Veículos por Ano deFabricação.");
-        System.out.println("4 - Listar Veículos por Quilometragem.");
-        System.out.println("5 - Listar Veículos não Vendidos");
-        System.out.println("6 - Sair");
-        System.out.println("");
-        System.out.println("Escolha a opção desejada: ");
-        try
-        {
-            nextMenu("listarVeiculo",util.testInput("[1-6]"));
-        }
-        catch (Exception e)
-        {
-            util.clear();
-            System.out.println("Caiu aquêêêêh" + e.getMessage());
-        }
-        
-    }
-
-    
-    public void nextMenu(String from,int escolha)
-    {
-        String modelo;
-        modelo = v.getModelo().getModelo();
-        v = daoListagem.getById(modelo);
-        
-        if(from.equalsIgnoreCase("listarVeiculo"))
-        {
-            switch(escolha)
-            {
-                case 1:
-                    listagemMarca();
-                    break;
-                case 2:
-                    listagemModelo();
-                    break;
-            }
-        }
-    }
-//</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Listar por Modelo">
     public void listagemModelo()
@@ -84,8 +36,7 @@ public class ListagemVeiculo
         try
         {
             nomeModelo = util.testInputString("[a-z-A-Z]");
-            listados = daoListagem.getByRestriction("Veiculo.listVeiculoByModelo",
-                    "mod", nomeModelo);
+            listados = vrn.selectListagemModelo(nomeModelo);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -115,8 +66,7 @@ public class ListagemVeiculo
         try
         {
             nomeMarca = util.testInputString("[a-z-A-Z]");
-            listados = daoListagem.getByRestriction
-                            ("Veiculo.listVeiculoByMarca", "marc", nomeMarca);
+            listados = vrn.selectListagemMarca(nomeMarca);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -134,6 +84,8 @@ public class ListagemVeiculo
             for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
         }
     }
+
+    
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Listar por Ano">
@@ -146,8 +98,7 @@ public class ListagemVeiculo
         try
         {
             anoFabricacao = util.testInput("[0-9]{4}");
-            listados = daoListagem.getByRestriction("Veiculo.listVeiculoByAno",
-                    "ano", anoFabricacao);
+            listados = vrn.selectListagemAno(anoFabricacao);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -167,6 +118,7 @@ public class ListagemVeiculo
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="Listar por KM">
     public void listagemKM()
     {
         Integer km;
@@ -176,8 +128,7 @@ public class ListagemVeiculo
         try
         {
             km = util.testInput("[0-9]{5}|[0-9]{4}|[0]{1}");
-            listados = daoListagem.getByRestriction("Veiculo.listVeiculoByKm",
-                    "km", km);
+            listados = vrn.selectListagemKM(km);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -195,6 +146,31 @@ public class ListagemVeiculo
             for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
         }
     }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Listar por Vendidos">
+    public void listagemVendidos()
+    {
+        try
+        {
+            listados = vrn.selectListagemVendido();
+            System.out.println("         *** ShopCar ***");
+            System.out.println("-------------------------------");
+            System.out.println("");
+            System.out.println("     Veículos Vendidos         ");
+            System.out.println("-------------------------------");
+            for(Veiculo v : listados)
+            {
+                System.out.println("Placa: " + v.getPlaca());
+            }
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+            for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
+        }
+    }
+//</editor-fold>
             
     //<editor-fold defaultstate="collapsed" desc="Pega a placa digitada pelo usuário">
     public void pegarPlaca()
@@ -247,3 +223,4 @@ public class ListagemVeiculo
     }
 //</editor-fold>
 }
+

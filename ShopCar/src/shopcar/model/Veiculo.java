@@ -8,8 +8,6 @@ package shopcar.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Year;
-import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -30,8 +28,9 @@ import javax.validation.constraints.Pattern;
             query = "SELECT v FROM Veiculo v WHERE v.anoFabricacao = :ano"),
     @NamedQuery(name = "Veiculo.listVeiculoByKm",
             query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
+    @NamedQuery(name = "Veiculo.listVeiculoByVendido",
+            query = "SELECT v FROM Veiculo v WHERE v.vendido = :vendido")
 })
-
 @Inheritance
 @DiscriminatorColumn(name = "tipoVeiculo")
 public class Veiculo implements Serializable
