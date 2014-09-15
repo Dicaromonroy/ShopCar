@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import shopcar.util.MyDatabase;
 import shopcar.util.Transacional;
 
@@ -91,5 +93,17 @@ public class JpaDAO<T> implements DAO<T>, Serializable
                 .getResultList();
         return resultList;
     }
+//    
+//    public List<T> getByPredicate(String property, Object filter)
+//    {
+//        CriteriaBuilder qb = em.getCriteriaBuilder();
+//        CriteriaQuery<T> c = qb.createQuery(classe);
+//        Root<T> p = c.from(classe);
+//        Predicate condition = qb
+//        c.where(condition);
+//        TypedQuery<T> q = em.createQuery(c); 
+//        List<T> result = q.getResultList();
+//        return result;
+//    }
 
 }

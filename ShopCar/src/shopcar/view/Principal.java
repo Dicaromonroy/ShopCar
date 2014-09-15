@@ -52,7 +52,7 @@ public class Principal
         
         try
         {
-            nextMenu("menuprincipal",util.testInput("[1-5]"));
+            nextMenu("menuprincipal",util.testInput("[1-5]", "Opção inválida!"));
         } 
         catch (Exception e)
         {

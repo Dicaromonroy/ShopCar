@@ -17,9 +17,9 @@ public class Util
 {
     @Inject private Scanner s;
     
-    public int testInput(String pattern) throws Exception
+    public Integer testInput(String pattern, String error) 
     {   
-        int test;
+        Integer test;
         if(s.hasNext(pattern))
         {
             test = s.nextInt();
@@ -27,7 +27,11 @@ public class Util
             return test;
         }
         else
-            throw new Exception("Opção errada!"); 
+        {
+            System.err.println(error);
+            test = null;
+            return test;
+        }
     }
     
     public void clear() 

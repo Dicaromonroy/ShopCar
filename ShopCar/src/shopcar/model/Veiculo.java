@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.Range;
 
 /**
  *
@@ -38,8 +39,8 @@ public class Veiculo implements Serializable
             "A Placa deve obedecer o formato ABC-1234!")
     private String placa;
     private String chassi;
-    @Temporal(TemporalType.DATE)
-    private Date anoFabricacao;
+    @Range(min = 4, max = 4, message = "Um ano deve possuir 4 digitos!")
+    private Integer anoFabricacao;
     private Integer quilometragem;
     private BigDecimal valorVeiculo; 
     private Integer potenciaCV;
@@ -191,12 +192,12 @@ public class Veiculo implements Serializable
         this.chassi = chassi;
     }
 
-    public Date getAnoFabricacao() 
+    public Integer getAnoFabricacao() 
     {
         return anoFabricacao;
     }
     
-    public void setAnoFabricacao(Date anoFabricacao) 
+    public void setAnoFabricacao(Integer anoFabricacao) 
     {
         this.anoFabricacao = anoFabricacao;
     }

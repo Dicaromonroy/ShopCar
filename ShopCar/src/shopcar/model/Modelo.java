@@ -17,6 +17,10 @@ import javax.persistence.*;
  * @author Mandy Grimm
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Modelo.listAllModelosByMarca"
+        query = "SELECT m FROM modelo m WHERE m.marca = :marca")
+})
 public class Modelo implements Serializable
 {
     @Id

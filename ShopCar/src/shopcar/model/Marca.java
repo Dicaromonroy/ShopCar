@@ -24,9 +24,9 @@ public class Marca implements Serializable
     private Integer marcaId;
     private String marca;
     @OneToMany(mappedBy = "placa")
-    private Set<Veiculo> veiculo;
+    private Set<Veiculo> veiculos;
     @OneToMany(mappedBy = "modeloId")
-    private Set<Modelo> modelo;
+    private Set<Modelo> modelos;
 
     //<editor-fold defaultstate="collapsed" desc="Hash and Equals">
     @Override
@@ -34,8 +34,8 @@ public class Marca implements Serializable
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.marcaId);
         hash = 41 * hash + Objects.hashCode(this.marca);
-        hash = 41 * hash + Objects.hashCode(this.veiculo);
-        hash = 41 * hash + Objects.hashCode(this.modelo);
+        hash = 41 * hash + Objects.hashCode(this.veiculos);
+        hash = 41 * hash + Objects.hashCode(this.modelos);
         return hash;
     }
     
@@ -54,10 +54,10 @@ public class Marca implements Serializable
         if (!Objects.equals(this.marca, other.marca)) {
             return false;
         }
-        if (!Objects.equals(this.veiculo, other.veiculo)) {
+        if (!Objects.equals(this.veiculos, other.veiculos)) {
             return false;
         }
-        if (!Objects.equals(this.modelo, other.modelo)) {
+        if (!Objects.equals(this.modelos, other.modelos)) {
             return false;
         }
         return true;
@@ -83,19 +83,19 @@ public class Marca implements Serializable
     }
   
     public Set<Veiculo> getVeiculo() {
-        return veiculo;
+        return veiculos;
     }
     
     public void setVeiculo(Set<Veiculo> veiculo) {
-        this.veiculo = veiculo;
+        this.veiculos = veiculo;
     }
    
     public Set<Modelo> getModelo() {
-        return modelo;
+        return modelos;
     }
     
     public void setModelo(Set<Modelo> modelo) {
-        this.modelo = modelo;
+        this.modelos = modelo;
     }
 //</editor-fold>
     
