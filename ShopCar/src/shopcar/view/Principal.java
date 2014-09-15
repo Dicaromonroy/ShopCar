@@ -70,7 +70,7 @@ public class Principal
                   //  cadastroVeiculo.saveVeiculo();
                     //break;
                 case 2:
-                    listagem.listagemAno();
+                    listagem.listagemKM();
                     break;
                 //case 3:
                   //  listagem.pegarPlaca();
@@ -87,21 +87,5 @@ public class Principal
     private boolean testId(Object id)
     {
         return true;
-    }
-    public void teste()    
-    {
-        try
-        {
-            Veiculo v;
-            v = dao.getById("ABC-1234");
-            System.out.println(v.getPlaca());
-        } 
-        catch (Exception e)
-        {
-            System.out.println(e.getCause());
-            System.out.println(e.getMessage());
-            System.out.println(e.getLocalizedMessage());
-        }
-        
     }
 }

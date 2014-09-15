@@ -136,22 +136,53 @@ public class ListagemVeiculo
     }
 //</editor-fold>
     
+    //<editor-fold defaultstate="collapsed" desc="Listar por Ano">
     public void listagemAno()
     {
-        Date anoFabricacao;
+        Integer anoFabricacao;
         System.out.println("         *** ShopCar ***");
         System.out.println("-------------------------------");
         System.out.println("Entre com o Ano de Fabricação desejado: ");
         try
         {
-            anoFabricacao = util.convertStringToDate(util.testInput("[0-9]{4}"));
+            anoFabricacao = util.testInput("[0-9]{4}");
             listados = daoListagem.getByRestriction("Veiculo.listVeiculoByAno",
-                    "mod", anoFabricacao);
+                    "ano", anoFabricacao);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
             System.out.println("");
             System.out.println("Veículos com o Ano de Fabricação informado");
+            System.out.println("-------------------------------");
+            for(Veiculo v : listados)
+            {
+                System.out.println("Placa: " + v.getPlaca());
+            }
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+            for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
+        }
+    }
+//</editor-fold>
+    
+    public void listagemKM()
+    {
+        Integer km;
+        System.out.println("         *** ShopCar ***");
+        System.out.println("-------------------------------");
+        System.out.println("Entre com a Quilometragem desejada: ");
+        try
+        {
+            km = util.testInput("[0-9]{5}|[0-9]{4}|[0]{1}");
+            listados = daoListagem.getByRestriction("Veiculo.listVeiculoByKm",
+                    "km", km);
+            
+            System.out.println("         *** ShopCar ***");
+            System.out.println("-------------------------------");
+            System.out.println("");
+            System.out.println("Veículos com a Quilometragem informada");
             System.out.println("-------------------------------");
             for(Veiculo v : listados)
             {

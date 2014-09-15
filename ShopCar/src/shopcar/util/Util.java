@@ -6,6 +6,8 @@
 
 package shopcar.util;
 
+import com.sun.org.apache.xerces.internal.impl.dv.xs.YearDV;
+import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -48,13 +50,5 @@ public class Util
         }
         else
            throw new Exception("Conteudo inválido!");
-    }
-    
-    public Date convertStringToDate(Integer year)
-    {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        Date date = calendar.getTime();
-        return date;
     }
 }

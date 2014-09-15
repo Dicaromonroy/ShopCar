@@ -8,6 +8,7 @@ package shopcar.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Year;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
@@ -26,9 +27,9 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "Veiculo.listVeiculoByMarca",
             query = "SELECT v FROM Veiculo v WHERE v.marca.marca = :marc"),
     @NamedQuery(name = "Veiculo.listVeiculoByAno",
-            query = "SELECT v FROM Veiculo v WHERE v.anoFacricacao = :ano"),
-//    @NamedQuery(name = "Veiculo.listVeiculoByKm",
-//            query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
+            query = "SELECT v FROM Veiculo v WHERE v.anoFabricacao = :ano"),
+    @NamedQuery(name = "Veiculo.listVeiculoByKm",
+            query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
 })
 
 @Inheritance
@@ -40,8 +41,7 @@ public class Veiculo implements Serializable
             "A Placa deve obedecer o formato ABC-1234!")
     private String placa;
     private String chassi;
-    @Temporal(TemporalType.DATE)
-    private Date anoFabricacao;
+    private Integer anoFabricacao;
     private Integer quilometragem;
     private BigDecimal valorVeiculo; 
     private Integer potenciaCV;
@@ -193,12 +193,12 @@ public class Veiculo implements Serializable
         this.chassi = chassi;
     }
 
-    public Date getAnoFabricacao() 
+    public Integer getAnoFabricacao() 
     {
         return anoFabricacao;
     }
     
-    public void setAnoFabricacao(Date anoFabricacao) 
+    public void setAnoFabricacao(Integer anoFabricacao) 
     {
         this.anoFabricacao = anoFabricacao;
     }
