@@ -52,7 +52,7 @@ public class Principal
         
         try
         {
-            nextMenu("menuprincipal",util.testInput(1,5));
+            nextMenu("menuprincipal",util.testInput("[1-5]"));
         } 
         catch (Exception e)
         {

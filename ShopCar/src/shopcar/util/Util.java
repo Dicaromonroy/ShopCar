@@ -17,10 +17,10 @@ public class Util
 {
     @Inject private Scanner s;
     
-    public int testInput(int a, int b) throws Exception
+    public int testInput(String pattern) throws Exception
     {   
-        int test = 0;
-        if(s.hasNext("["+a+"-"+b+"]"))
+        int test;
+        if(s.hasNext(pattern))
         {
             test = s.nextInt();
             clear();

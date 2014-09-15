@@ -15,7 +15,7 @@ import javax.persistence.Entity;
  * @author Mandy Grimm
  */
 @Entity
-public class Moto extends Veiculo implements Serializable
+public class Moto extends VeiculoPassageiro implements Serializable
 {
     
 }

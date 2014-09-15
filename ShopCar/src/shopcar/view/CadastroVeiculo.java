@@ -7,6 +7,12 @@
 package shopcar.view;
 
 import java.lang.reflect.*;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,9 +32,9 @@ public class CadastroVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoCadastro;
     @Inject private Map<String,Veiculo> veiculoMap;
-
     @Inject private Scanner sCad;
     @Inject @MyArrayList private List<String> tipoVeiculos;
+    @Inject @MyArrayList private List<Modelo> modelos;
     @Inject private Validator<Veiculo> validaVeiculo;
     
     
@@ -52,19 +58,30 @@ public class CadastroVeiculo
         System.out.println("");
         load();
         veiculo = testIfNeedToListVeiculos();
-        if(veiculo == null) 
-        {
-            System.err.println("Não existe esse Tipo de Veiculo!");
-            testIfNeedToListVeiculos();
-        }
         
         try
         {
-            inputMaker(veiculo, "Entre com a Placa do Veiculo: ", "Placa", String.class, 2); 
+            inputMaker(veiculo, "Entre com a Placa do Veiculo: ", "Placa", "placa" , String.class, 2); 
             System.out.println("-------------------------------");
-            inputMaker(veiculo, "Entre com o Número de Chassi do Veiculo: ", "Chassi", String.class, 2);
+            inputMaker(veiculo, "Entre com o Número de Chassi do Veiculo: ", "Chassi", "chassi" , String.class, 2);
             System.out.println("-------------------------------");
-            inputMaker(veiculo, "Entre com a Quilometragem do Veiculo: ", "NumAssentos", Integer.class, 1);
+            inputMaker(veiculo, "Entre com a Quilometragem do Veiculo: ", "Quilometragem" , "quilometragem" ,Integer.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Potência em CV do Veiculo: ", "PotenciaCV" , "potenciaCV" ,Integer.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Cilindradas do Veiculo: ", "Cilindradas" , "cilindradas" ,Integer.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Número de Eixos do Veiculo: ", "NumeroEixos" , "numeroEixos" ,Integer.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Número de Marchas do Veiculo: ", "NumeroMarchas" , "numeroMarchas" ,Integer.class, 2);
+            System.out.println("-------------------------------");
+            inputMaker(veiculo, "Entre com a Data de Fabricação do Veiculo: ", "AnoFabricacao" , "anoFabricacao" ,Date.class, 2);
+//            System.out.println("-------------------------------");
+//            inputMaker(veiculo, "Entre com a Número de Marchas do Veiculo: ", "NumeroMarchas" , "numeroMarchas" ,Integer.class, 2);
+//            System.out.println("-------------------------------");
+//            inputMaker(veiculo, "Entre com a Número de Marchas do Veiculo: ", "NumeroMarchas" , "numeroMarchas" ,Integer.class, 2);
+//            System.out.println("-------------------------------");
+//            inputMaker(veiculo, "Entre com a Número de Marchas do Veiculo: ", "NumeroMarchas" , "numeroMarchas" ,Integer.class, 2);
             
             daoCadastro.save(veiculo);
             System.out.println("@@@Salvo");
@@ -73,33 +90,47 @@ public class CadastroVeiculo
         {
             System.err.println(ex.getCause());
             System.err.println(ex.getMessage());
-            System.err.println(ex.getLocalizedMessage());
+            for(StackTraceElement s : ex.getStackTrace()) System.err.println(s);
             System.err.println("To no save");
         }
     }
 
-    public void inputMaker(Veiculo obj, String question, String property, 
-            Class propertyClass, Integer methodInheritanceHierarchy) throws  
+    public void inputMaker(Veiculo obj, String question, String methodName, 
+            String porpertyName ,Class propertyClass, Integer methodInheritanceHierarchy) throws  
             IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         String err;
         System.out.println(question);
-        String test = sCad.nextLine();
+        Object b = null;
+        if(propertyClass.equals(Integer.class)) 
+            b = sCad.nextInt();
+        else if(propertyClass.equals(String.class)) 
+            b = sCad.nextLine();
+        else if(propertyClass.equals(BigDecimal.class)) 
+            b = sCad.nextBigDecimal();
+        else if(propertyClass.equals(Date.class)) 
+        {
+            String test = sCad.nextLine();
+            b = convertStringToDate(test);
+        }
+            
+            
         Class clazz = obj.getClass();
         for(int i = 1; i <= methodInheritanceHierarchy; i++) 
             clazz = clazz.getSuperclass();
         try
         {
-            Method method = clazz.getMethod("set" + property, propertyClass);
-            method.invoke(obj, new Object[] {test});
+            Method method = clazz.getMethod("set" + methodName, propertyClass);
+            method.invoke(obj, b);
         } 
         catch (NoSuchMethodException e)
         {
+            System.out.println("deu erro");
             System.err.println(e.getMessage());
         }
         
-        if(!testSaveInput(obj, property.toLowerCase())) 
-            inputMaker(obj, question, property, propertyClass, methodInheritanceHierarchy);
+        if(!testSaveInput(obj, porpertyName)) 
+            inputMaker(obj, question, methodName, porpertyName, propertyClass, methodInheritanceHierarchy);
     }
     
     public boolean testSaveInput(Veiculo obj, String property)
@@ -131,7 +162,7 @@ public class CadastroVeiculo
             for(String s : tipoVeiculos)
             {
                 if(test.equalsIgnoreCase(s))
-                {System.out.println("Estou aqui!" + test);
+                {
                     try
                     {
                         Object c = Class.forName("shopcar.model." + s)
@@ -145,7 +176,23 @@ public class CadastroVeiculo
                 }  
             }
         }
-        return null;
+        System.err.println("Não existe esse Tipo de Veiculo!");
+        return testIfNeedToListVeiculos();
     }
     
+    public Date convertStringToDate(String date) 
+    {
+        Date d = null;
+        try
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdff = new SimpleDateFormat("yyyy-MM-dd");
+            
+        }
+        catch (ParseException e)
+        {
+            System.err.println("Não foi possivel converter a Data!");
+        }
+        return d;
+    }
 }
