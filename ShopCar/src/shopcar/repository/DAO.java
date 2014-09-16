@@ -7,13 +7,12 @@
 package shopcar.repository;
 
 
-import java.io.Serializable;
 import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *
  * @author info1
+ * @param <T>
  */
 public interface DAO<T>
 {
@@ -28,4 +27,6 @@ public interface DAO<T>
     public List<T> getAll();
     
     public T getByRestriction(String attribute, String filter);
+    
+    public List<T> getByRestriction(String namedQuery, String parameter, Object value);
 }

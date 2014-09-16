@@ -45,6 +45,11 @@ public class JpaDAO<T> implements DAO<T>, Serializable
         return this.em;
     }
     
+    public void getFlush()
+    {
+        em.flush();
+    }
+    
     @Override
     @Transacional
     public void save(T entity)
@@ -52,6 +57,7 @@ public class JpaDAO<T> implements DAO<T>, Serializable
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
+        em.flush();
     }
 
     @Override
@@ -63,7 +69,6 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     @Override
     public void remove(T entity)
     {
-        //em.remove(entity);
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -93,17 +98,4 @@ public class JpaDAO<T> implements DAO<T>, Serializable
                 .getResultList();
         return resultList;
     }
-//    
-//    public List<T> getByPredicate(String property, Object filter)
-//    {
-//        CriteriaBuilder qb = em.getCriteriaBuilder();
-//        CriteriaQuery<T> c = qb.createQuery(classe);
-//        Root<T> p = c.from(classe);
-//        Predicate condition = qb
-//        c.where(condition);
-//        TypedQuery<T> q = em.createQuery(c); 
-//        List<T> result = q.getResultList();
-//        return result;
-//    }
-
 }

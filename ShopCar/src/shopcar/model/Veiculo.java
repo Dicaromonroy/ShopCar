@@ -35,16 +35,16 @@ import org.hibernate.validator.constraints.Range;
 public class Veiculo implements Serializable
 {
     @Id
-    @Pattern(regexp = "[A-Z]{3}-\\d{4}", message = 
-            "A Placa deve obedecer o formato ABC-1234!")
+    //@Pattern(regexp = "[A-Z]{3}-\\d{4}", message = 
+    //        "A Placa deve obedecer o formato ABC-1234!")
     private String placa;
     private String chassi;
-    @Range(min = 4, max = 4, message = "Um ano deve possuir 4 digitos!")
+    @Digits(integer = 4, fraction = 4 , message = "Um ano não pode ter mais do que 4 dígitos!")
     private Integer anoFabricacao;
     private Integer quilometragem;
     private BigDecimal valorVeiculo; 
     private Integer potenciaCV;
-    private Integer cilindradas;
+    private String cilindradas;
     private Integer numeroEixos;
     private Integer numeroMarchas;
     private boolean vendido;
@@ -232,12 +232,12 @@ public class Veiculo implements Serializable
         this.potenciaCV = potenciaCV;
     }
     
-    public Integer getCilindradas() 
+    public String getCilindradas() 
     {
         return cilindradas;
     }
     
-    public void setCilindradas(Integer cilindradas) 
+    public void setCilindradas(String cilindradas) 
     {
         this.cilindradas = cilindradas;
     }

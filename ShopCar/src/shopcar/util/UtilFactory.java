@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import shopcar.view.CadastroVeiculo;
 

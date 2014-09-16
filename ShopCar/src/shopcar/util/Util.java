@@ -36,6 +36,7 @@ public class Util
     public String testInputString(String pattern, String error)
     {
         String test = null;
+   
         if(s.hasNext(pattern))
         {
             test = s.nextLine();

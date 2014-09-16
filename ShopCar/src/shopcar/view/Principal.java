@@ -74,6 +74,12 @@ public class Principal
         }
     }
     
+    public String testPlaca()
+    {
+        
+        return "";
+    }
+    
     public int MenuDeListagem()
     {
         return 0;

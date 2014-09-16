@@ -25,7 +25,7 @@ public class Marca implements Serializable
     private String marca;
     @OneToMany(mappedBy = "placa")
     private Set<Veiculo> veiculos;
-    @OneToMany(mappedBy = "modeloId")
+    @OneToMany(mappedBy = "marca")
     private Set<Modelo> modelos;
 
     //<editor-fold defaultstate="collapsed" desc="Hash and Equals">

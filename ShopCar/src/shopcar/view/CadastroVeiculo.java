@@ -31,9 +31,7 @@ public class CadastroVeiculo
     @Inject private Map<String,Veiculo> veiculoMap;
     @Inject private Scanner sCad;
     @Inject private Util util;
-    @Inject private Marca marca;
-    @Inject private Modelo modelo;
-    @Inject private Cor cor;
+    //@Inject private Marca marca;
     @Inject @MyArrayList private List<String> tipoVeiculos;
     @Inject @MyArrayList private List<Modelo> modelos;
     @Inject @MyArrayList private List<Cor> cores;
@@ -43,7 +41,7 @@ public class CadastroVeiculo
     
     public CadastroVeiculo() { }
     
-    public void load()
+    private void load()
     {
         try
         {
@@ -80,9 +78,12 @@ public class CadastroVeiculo
                     "Chassi", "chassi" , String.class, 2);
             System.out.println("-------------------------------");
             
-            veiculo.setMarca(testNewMarca());
-           
-            veiculo.setModelo(testNewModelo());
+            Marca marca = testNewMarca();
+            veiculo.setMarca(marca);
+            System.err.println(marca.getMarcaId());
+            System.err.println(marca.getMarca());
+            veiculo.setModelo(testNewModelo(marca));
+            veiculo.setCor(testNewCor());
             
             System.out.println("-------------------------------");
             inputMaker(veiculo, "Entre com a Quilometragem do Veiculo: ", 
@@ -113,8 +114,6 @@ public class CadastroVeiculo
             inputMaker(veiculo, "Entre com a Capacidade Máxima de Carga do Veiculo "
                     + "se houver[Caminhão, Caminhonete]: ", "CapcMaxCarga" , "capcMaxCarga"
                     ,BigDecimal.class, 1);
-//            System.out.println("-------------------------------");
-//            inputMaker(veiculo, "Entre com a Número de Marchas do Veiculo: ", "NumeroMarchas" , "numeroMarchas" ,Integer.class, 2);
             
             daoCadastro.save(veiculo);
             System.out.println("@@@Salvo");
@@ -128,7 +127,7 @@ public class CadastroVeiculo
         }
     }
     
-    public void inputMaker(Veiculo obj, String question, String methodName, 
+    private void inputMaker(Veiculo obj, String question, String methodName, 
             String porpertyName ,Class propertyClass, Integer methodInheritanceHierarchy) throws  
             IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
@@ -152,23 +151,52 @@ public class CadastroVeiculo
             inputMaker(obj, question, methodName, porpertyName, propertyClass, methodInheritanceHierarchy);
     }
     
-    public Object getPropertyClassInput(Class propertyClass)
+    private Integer testInputInteger()
+    {
+        String test = sCad.nextLine();
+        Integer i;
+        try
+        {
+            i = Integer.valueOf(test);
+            return i;
+        } 
+        catch (NumberFormatException e)
+        {
+            System.err.println("Digite apenas números!");
+            return testInputInteger();
+        }
+    }
+    
+    private BigDecimal testInputBigDecimal()
+    {
+        String test = sCad.nextLine();
+        BigDecimal bd;
+        try
+        {
+            bd = new BigDecimal(test);
+            return bd;
+        } 
+        catch (NumberFormatException e)
+        {
+            System.err.println("Digite um formato decimal correto!");
+            return testInputBigDecimal();
+        }
+    }
+    
+    private Object getPropertyClassInput(Class propertyClass)
     {
         Object obj = null;
         if(propertyClass.equals(Integer.class)) 
-        {
-
-        }
-            
+            obj = testInputInteger(); 
         else if(propertyClass.equals(String.class)) 
             obj = sCad.nextLine();
         else if(propertyClass.equals(BigDecimal.class)) 
-            obj = sCad.nextBigDecimal(); 
+            obj = testInputBigDecimal();
         
         return obj;
     }
     
-    public boolean testSaveInput(Veiculo obj, String property)
+    private boolean testSaveInput(Veiculo obj, String property)
     {
         String err = validaVeiculo.Validate(obj , property);
         if(err != null) 
@@ -180,7 +208,7 @@ public class CadastroVeiculo
             return true;
     }
     
-    public Veiculo testIfNeedToListVeiculos()
+    private Veiculo testIfNeedToListVeiculos()
     {
         System.out.println("Entre com o Tipo de Veiculo(-l[ENTER] para listar todos) : ");
         String test = sCad.nextLine();
@@ -204,47 +232,50 @@ public class CadastroVeiculo
                                 .newInstance();
                         return (Veiculo) c;
                     } 
-                    catch (Exception e)
+                    catch(ReflectiveOperationException e)
                     {
                         System.err.println(e.getMessage());
                     }
                 }  
             }
         }
-        System.err.println("Não existe esse Tipo de Veiculo!");
+        System.err.println("Não existe esse Tipo de Veiculo! O nome deve obedecer"
+                + " o formato da lista de Veiculos!");
         return testIfNeedToListVeiculos();
     }
-    
         
-    private boolean createModelo(String test)
+    private Modelo createModelo(String test, Marca marca)
     {
-        this.modelo.setModelo(test);
-        System.out.println("-------------------------------");
-        System.out.println("Entre com a versão do Modelo: ");
-        this.modelo.setVersao(sCad.nextLine());
-        this.modelo.setMarca(this.marca);
-        this.marca.getModelo().add(modelo);
         try 
         {
+            Modelo modelo = new Modelo();
+            modelo.setModelo(test);
+            System.out.println("-------------------------------");
+            System.out.println("Entre com a versão do Modelo: ");
+            modelo.setVersao(sCad.nextLine());
+            modelo.setMarca(marca);
             daoModelo.save(modelo);
             System.out.println("Modelo incluido!");
-            return true;
+            return modelo;
         } 
         catch (Exception e) 
         {
             System.err.println("Houve um erro ao inserir o modelo! " + e.getMessage());
-            return createModelo(test);
+            for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
+            for(Throwable te : e.getSuppressed()) System.err.println(te);
+            return createModelo(test, marca);
         }
     }
     
-    private boolean createMarca(String test)
+    private Marca createMarca(String test)
     {
         try
         {
-            this.marca.setMarca(test);
-            this.daoMarcas.save(this.marca);
+            Marca marca = new Marca();
+            marca.setMarca(test);
+            this.daoMarcas.save(marca);
             System.out.println("Marca incluida!");
-            return true;
+            return marca;
         } 
         catch (Exception e)
         {
@@ -253,24 +284,24 @@ public class CadastroVeiculo
         }
     }
     
-    private boolean createCor(String test)
+    private Cor createCor(String test)
     {
         try 
         {
-            this.cor.setCor(test);
-            this.daoCores.save(this.cor);
+            Cor cor = new Cor();
+            cor.setCor(test);
+            this.daoCores.save(cor);
             System.out.println("Cor incluida!");
-            return true;
+            return cor;
         } catch (Exception e) 
         {
             System.err.println("Houve um erro ao inserir a cor! " + e.getMessage());
             return createCor(test);
         }
     }
-    
-    public Modelo testNewModelo()
+    private Modelo testNewModelo(Marca marca)
     {
-        modelos = daoModelos.listAllModelosByMarca(this.marca);
+        modelos = daoModelos.listAllModelosByMarca(marca);
         System.out.println("Entre com o nome do Modelo(-l[ENTER] para listar os modelos cadastrados) : ");
         String test = sCad.nextLine();
         if(test.equalsIgnoreCase("-l"))
@@ -279,40 +310,26 @@ public class CadastroVeiculo
             for(Modelo m : modelos)
                 System.out.println(m.getModelo());
             System.out.println("-------------------------------");
-            return testNewModelo();
+            return testNewModelo(marca);
         }
         else
         {
             for(Modelo m : modelos) 
             {
                 if(test.equals(m.getModelo())) 
-                {
-                    this.modelo = m;
                     return m;
-                }
             }
             
             System.out.println("Deseja Cadastrar o Modelo: " + test + " ?[s/n]");
             if(sCad.nextLine().equalsIgnoreCase("s")) 
-            {
-                try
-                {
-                    this.createModelo(test);
-                } 
-                catch (Exception e)
-                {
-                    System.err.println("Houve um erro ao inserir a marca! " + e.getMessage());
-                    return testNewModelo();
-                }
-            }
+                return this.createModelo(test, marca);
             else
-                return testNewModelo();
+                return testNewModelo(marca);
         }
-        return null;
     }
 
     
-    public Marca testNewMarca()
+    private Marca testNewMarca()
     {
         System.out.println("Entre com o nome da Marca(-l[ENTER] para listar as Marcas cadastradas) : ");
         String test = sCad.nextLine();
@@ -329,24 +346,19 @@ public class CadastroVeiculo
             for(Marca m : marcas) 
             {
                 if(test.equalsIgnoreCase(m.getMarca()))
-                {
-                    this.marca = m;
                     return m;
-                }
             }
+        
             
             System.out.println("Deseja Cadastrar a Marca: " + test + " ?[s/n]");
             if(sCad.nextLine().equalsIgnoreCase("s")) 
-            {
-                this.createMarca(test);
-            }
+                return this.createMarca(test);
             else
                 return testNewMarca();
         }
-        return null;
     }
     
-    public Cor testNewCor()
+    private Cor testNewCor()
     {
         System.out.println("Entre com o nome da Cor(-l[ENTER] para listar as Cores cadastradas) : ");
         String test = sCad.nextLine();
@@ -363,20 +375,14 @@ public class CadastroVeiculo
             for(Cor c : cores) 
             {
                 if(test.equalsIgnoreCase(c.getCor()))
-                {
-                    this.cor = c;
                     return c;
-                }
             }
             
             System.out.println("Deseja Cadastrar a Cor: " + test + " ?[s/n]");
             if(sCad.nextLine().equalsIgnoreCase("s")) 
-            {
-                this.createCor(test);
-            }
+                return this.createCor(test);
             else
                 return testNewCor();
         }
-        return null;
     }
 }
