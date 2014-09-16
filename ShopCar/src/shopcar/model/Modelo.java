@@ -18,9 +18,8 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Modelo.listAllModelosByMarca"
-        query = "SELECT m FROM modelo m WHERE m.marca = :marca")
-})
+    @NamedQuery(name = "Modelo.listAllModelosByMarca",
+        query = "SELECT m FROM Modelo m WHERE m.marca = :marca")})
 public class Modelo implements Serializable
 {
     @Id

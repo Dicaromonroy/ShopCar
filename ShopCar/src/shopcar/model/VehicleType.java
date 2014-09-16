@@ -19,7 +19,7 @@ public enum VehicleType
     CAMINHAO("Caminhao", Caminhao.class);
 
     private static Map<String, VehicleType> types = new HashMap<>();
-
+    
     static 
     {
         types.put(CARRO.asString(), CARRO);

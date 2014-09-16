@@ -29,8 +29,23 @@ public class Util
         else
         {
             System.err.println(error);
-            test = null;
+            return null;
+        }
+    }
+    
+    public String testInputString(String pattern, String error)
+    {
+        String test = null;
+        if(s.hasNext(pattern))
+        {
+            test = s.nextLine();
+            clear();
             return test;
+        }
+        else
+        {
+            System.err.println(error);
+            return testInputString(pattern, error);
         }
     }
     

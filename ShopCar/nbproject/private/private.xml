@@ -3,16 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/META-INF/persistence.xml</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/view/CadastroVeiculo.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/util/Util.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/view/Principal.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/repository/JpaDAO.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/model/VeiculoTransporte.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/model/Veiculo.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/model/VeiculoPassageiro.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/model/Modelo.java</file>
-            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/model/Carro.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/repository/JpaDAO.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/model/Modelo.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/model/ModeloDAO.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/view/CadastroVeiculo.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/util/Util.java</file>
+            <file>file:/C:/Users/Aluno/Desktop/ShopCar/src/shopcar/model/Veiculo.java</file>
         </group>
     </open-files>
 </project-private>

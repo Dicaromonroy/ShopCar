@@ -89,7 +89,7 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     public List<T> getByRestriction(String namedQuery, String parameter, Object value)
     {
         List <T> resultList = (List<T>) em.createNamedQuery(namedQuery)
-                .setParameter("mod", value)
+                .setParameter(parameter, value)
                 .getResultList();
         return resultList;
     }
