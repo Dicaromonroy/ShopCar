@@ -57,7 +57,6 @@ public class JpaDAO<T> implements DAO<T>, Serializable
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
-        em.flush();
     }
 
     @Override

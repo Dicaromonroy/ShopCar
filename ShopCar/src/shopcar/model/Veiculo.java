@@ -24,6 +24,8 @@ import org.hibernate.validator.constraints.Range;
             query= "SELECT DISTINCT v.class FROM Veiculo v"),
     @NamedQuery(name = "Veiculo.listAllVeiculoModelos",
             query = "SELECT v.modelo FROM Veiculo v"),
+    @NamedQuery(name = "Veiculo.listAllVeiculosPlacas",
+            query = "SELECT v.placa FROM veiculo v")
 //    @NamedQuery(name = "Veiculo.listAllVeiculoMarcas",
 //            query = "SELECT v.marca FROM Veiculo v"),
 //    @NamedQuery(name = "Veiculo.listAllVeiculoCores",

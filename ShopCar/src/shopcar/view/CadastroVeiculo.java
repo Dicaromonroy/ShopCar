@@ -6,6 +6,7 @@
 
 package shopcar.view;
 
+import shopcar.repository.ModeloDAO;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.util.List;
@@ -93,7 +94,7 @@ public class CadastroVeiculo
                     "PotenciaCV" , "potenciaCV" ,Integer.class, 2);
             System.out.println("-------------------------------");
             inputMaker(veiculo, "Entre com a Cilindradas do Veiculo: ", 
-                    "Cilindradas" , "cilindradas" ,Integer.class, 2);
+                    "Cilindradas" , "cilindradas" ,String.class, 2);
             System.out.println("-------------------------------");
             inputMaker(veiculo, "Entre com a Número de Eixos do Veiculo: ", 
                     "NumeroEixos" , "numeroEixos" ,Integer.class, 2);
@@ -279,7 +280,8 @@ public class CadastroVeiculo
         } 
         catch (Exception e)
         {
-            System.err.println("Houve um erro ao inserir a marca! " + e.getMessage());
+            System.err.println("Houve um erro ao inserir a marca! " + e.getCause());
+            for(StackTraceElement t : e.getStackTrace()) System.err.println(t);
             return createMarca(test);
         }
     }
@@ -316,7 +318,7 @@ public class CadastroVeiculo
         {
             for(Modelo m : modelos) 
             {
-                if(test.equals(m.getModelo())) 
+                if(test.equalsIgnoreCase(m.getModelo())) 
                     return m;
             }
             

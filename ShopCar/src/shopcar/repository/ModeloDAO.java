@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.repository;
 
 import java.util.List;
 import javax.inject.Inject;
+import shopcar.model.Modelo;
 import shopcar.repository.JpaDAO;
 
 /**
