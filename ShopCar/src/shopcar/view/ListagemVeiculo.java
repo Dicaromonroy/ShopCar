@@ -12,7 +12,6 @@ import shopcar.model.*;
 import shopcar.repository.JpaDAO;
 import shopcar.util.MyArrayList;
 import shopcar.util.Util;
-import shopcar.util.VeiculosType;
 
 /**
  *
@@ -22,10 +21,10 @@ public class ListagemVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoListagem;
     private String idVeiculo;
-    @Inject private VeiculoDAO vrn;
+    @Inject private VeiculoRN vrn;
     @Inject private Util util;
     @Inject @MyArrayList private List<Veiculo> listados;
-    @Inject @VeiculosType(VeiculoTypes.VEICULO) private Veiculo v;
+    private Veiculo v = new Veiculo();
     
     //<editor-fold defaultstate="collapsed" desc="Listar por Modelo">
     public void listagemModelo()
@@ -37,7 +36,7 @@ public class ListagemVeiculo
         try
         {
             nomeModelo = util.testInputString("[a-z-A-Z]");
-            listados = vrn.listVeiculoByModelo(nomeModelo);
+            listados = vrn.selectListagemModelo(nomeModelo);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -67,7 +66,7 @@ public class ListagemVeiculo
         try
         {
             nomeMarca = util.testInputString("[a-z-A-Z]");
-            listados = vrn.listVeiculoByMarca(nomeMarca);
+            listados = vrn.selectListagemMarca(nomeMarca);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -99,7 +98,7 @@ public class ListagemVeiculo
         try
         {
             anoFabricacao = util.testInput("[0-9]{4}");
-            listados = vrn.listVeiculoByAno(anoFabricacao);
+            listados = vrn.selectListagemAno(anoFabricacao);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -129,7 +128,7 @@ public class ListagemVeiculo
         try
         {
             km = util.testInput("[0-9]{5}|[0-9]{4}|[0]{1}");
-            listados = vrn.listVeiculoByKm(km);
+            listados = vrn.selectListagemKM(km);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -154,7 +153,7 @@ public class ListagemVeiculo
     {
         try
         {
-            listados = vrn.listVeiculoByVendido();
+            listados = vrn.selectListagemVendido();
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
             System.out.println("");
@@ -216,24 +215,10 @@ public class ListagemVeiculo
             System.out.println("| Número de Marchas: " + v.getNumeroMarchas());
             System.out.println("| Potência em CV: " + v.getPotenciaCV());
             System.out.println("| Quilometragemo: " + v.getQuilometragem());
-            /*if(VeiculoPassageiro.class.equals(v.getClass().getSuperclass()))
-            {
-                try
-                {
-                    Method method = v.getClass().getSuperclass().getDeclaredMethod("getNumAssentos");
-                    Integer i = (Integer) method.invoke(v);
-                    System.out.println(i);
-                }
-                catch (Exception e) 
-                {
-                    System.out.println(e.getCause());
-                }
-            }*/
         }
         catch (Exception e)
         {
             System.err.println(e.getMessage());
-             for(StackTraceElement st : e.getStackTrace()) System.err.println(st);
         }
     }
 //</editor-fold>

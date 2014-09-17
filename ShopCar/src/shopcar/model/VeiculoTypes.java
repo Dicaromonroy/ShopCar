@@ -16,8 +16,7 @@ public enum VeiculoTypes
     CARRO("Carro"),
     CAMINHAO("Caminhão"),
     CAMINHONETE("Caminhonete"),
-    ONIBUS("Ônibus"),
-    VEICULO("Veiculo");
+    ONIBUS("Ônibus");
     
     private final String descricao;
     
