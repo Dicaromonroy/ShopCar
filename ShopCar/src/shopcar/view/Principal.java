@@ -6,15 +6,13 @@
 
 package shopcar.view;
 
+import java.util.Scanner;
 import javax.enterprise.context.ApplicationScoped;
 
 import javax.inject.*;
 import shopcar.controller.*;
-import shopcar.model.*;
-import shopcar.repository.JpaDAO;
+import shopcar.repository.VeiculoDAO;
 import shopcar.util.*;
-
-
 
 /**
  *
@@ -25,12 +23,13 @@ public class Principal
 {
     @Inject private Util util;
     @Inject private CadastroVeiculo cadastroVeiculo;
+    @Inject private VendaVeiculo vendaVeiculo;
     @Inject private VendeCarro vendeCarro;
-    @Inject private VeiculoController veiculoController;
+    @Inject private VeiculoVendaController veiculoController;
+    @Inject private VeiculoDAO veiculoDAO;
+    @Inject private Scanner s;
+    private String veiculoPlaca;
     
-    @Inject private Validator<Veiculo> valida; 
-    
-    @Inject private JpaDAO<Veiculo> dao;
 
     
     
@@ -68,25 +67,48 @@ public class Principal
             switch(escolha)
             {
                 case 1: 
-                    cadastroVeiculo.saveVeiculo();
+                    if(!testPlaca())
+                    {
+                        util.clear();
+                        cadastroVeiculo.saveVeiculo(veiculoPlaca);
+                    }
+                    else
+                    {
+                        System.out.println("Esta placa já está cadastrada! "
+                                + "Deseja ver a ficha deste Veiculo? [s/n]");
+                        String test = s.nextLine();
+                        if(test.equalsIgnoreCase("s"))
+                            //chamaficha;
+                            throw new UnsupportedOperationException("Not implemented yet");
+                    }
+                break;
+                case 5:
+                    if(testPlaca())
+                        vendaVeiculo.Vender(veiculoPlaca);
+                    break;
+                    
                 
             }
         }
     }
     
-    public String testPlaca()
+    private boolean testPlaca()
     {
-        
-        return "";
-    }
-    
-    public int MenuDeListagem()
-    {
-        return 0;
-    }
-    
-    private boolean testId(Object id)
-    {
-        return true;
+        System.out.println("-------------------------------");
+        System.out.println("Entre com a placa do Veiculo[FORMATO: ABC-1234]: ");
+        if(s.hasNext("[A-Z]{3}-\\d{4}"))
+        {
+            veiculoPlaca = s.nextLine();
+            if(veiculoDAO.testPlaca(veiculoPlaca))
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            System.out.println("Formato de placa errado! ");
+            s.next();
+            return testPlaca();
+        }
     }
 }

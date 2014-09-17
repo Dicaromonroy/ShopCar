@@ -32,7 +32,6 @@ public class CadastroVeiculo
     @Inject private Map<String,Veiculo> veiculoMap;
     @Inject private Scanner sCad;
     @Inject private Util util;
-    //@Inject private Marca marca;
     @Inject @MyArrayList private List<String> tipoVeiculos;
     @Inject @MyArrayList private List<Modelo> modelos;
     @Inject @MyArrayList private List<Cor> cores;
@@ -60,7 +59,7 @@ public class CadastroVeiculo
         }
     }
     
-    public void saveVeiculo()
+    public void saveVeiculo(String placa)
     {
         Veiculo veiculo;
         System.out.println("         *** ShopCar ***");
@@ -72,8 +71,7 @@ public class CadastroVeiculo
         
         try
         {
-            inputMaker(veiculo, "Entre com a Placa do Veiculo: ", "Placa", "placa" 
-                    , String.class, 2); 
+            veiculo.setPlaca(placa);
             System.out.println("-------------------------------");
             inputMaker(veiculo, "Entre com o Número de Chassi do Veiculo: ", 
                     "Chassi", "chassi" , String.class, 2);
@@ -116,8 +114,11 @@ public class CadastroVeiculo
                     + "se houver[Caminhão, Caminhonete]: ", "CapcMaxCarga" , "capcMaxCarga"
                     ,BigDecimal.class, 1);
             
+            System.out.println("-------------------------------");
+            System.out.println(veiculo.getPlaca());
+            System.out.println(veiculo.getMarca().getMarca());
             daoCadastro.save(veiculo);
-            System.out.println("@@@Salvo");
+            System.out.println("Veiculo cadastrado com sucesso!");
         } 
         catch(Exception ex)
         {

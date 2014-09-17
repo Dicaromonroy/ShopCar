@@ -9,7 +9,7 @@ package shopcar.repository;
 import java.util.List;
 import javax.inject.Inject;
 import shopcar.model.Veiculo;
-import shopcar.repository.JpaDAO;
+import shopcar.util.MyArrayList;
 
 /**
  *
@@ -17,41 +17,41 @@ import shopcar.repository.JpaDAO;
  */
 public class VeiculoDAO
 {
-    @Inject private JpaDAO<Veiculo> daoListagem;
-    @Inject private List<String> placas;
+    @Inject private JpaDAO<Veiculo> daoVeiculo;
+    @Inject @MyArrayList private List<String> placas;
     
     //<editor-fold defaultstate="collapsed" desc="Selects de Listagens">
     public List<Veiculo> listVeiculoByVendido()
     {
-       List<Veiculo> resultList = daoListagem.getByRestriction
+       List<Veiculo> resultList = daoVeiculo.getByRestriction
         ("Veiculo.listVeiculoByVendido", "vendido", true);
         return resultList;
     }
     
     public List<Veiculo> listVeiculoByModelo(String modelo)
     {
-        List<Veiculo> resultList = daoListagem.getByRestriction
+        List<Veiculo> resultList = daoVeiculo.getByRestriction
         ("Veiculo.listVeiculoByModelo", "mod", modelo);
         return resultList;
     }
     
     public List<Veiculo> listVeiculoByMarca(String marca)
     {
-        List<Veiculo> resultList = daoListagem.getByRestriction
+        List<Veiculo> resultList = daoVeiculo.getByRestriction
         ("Veiculo.listVeiculoByMarca", "marc", marca);
         return resultList;
     }
     
     public List<Veiculo> listVeiculoByKm(Integer km)
     {
-        List<Veiculo> resultList = daoListagem.getByRestriction
+        List<Veiculo> resultList = daoVeiculo.getByRestriction
         ("Veiculo.listVeiculoByKm", "km", km);
         return resultList;
     }
     
     public List<Veiculo> listVeiculoByAno(Integer ano)
     {
-        List<Veiculo> resultList = daoListagem.getByRestriction
+        List<Veiculo> resultList = daoVeiculo.getByRestriction
         ("Veiculo.listVeiculoByAno", "ano", ano);
         return resultList;
     }
@@ -65,14 +65,19 @@ public class VeiculoDAO
     
     public boolean testPlaca(String placa)
     {
-        placas = daoListagem.getEntityManager()
+        try
+        {
+            placas = daoVeiculo.getEntityManager()
                 .createNamedQuery("Veiculo.listAllVeiculosPlacas")
                 .getResultList();
+        } 
+        catch (Exception e)
+        {
+            System.err.println("Houve erro ao listar a placas! " + e.getCause());
+        }
         
         for(String s : placas) 
-        {
             if(s.equals(placa)) return true;
-        }
         return false;
     }
 //</editor-fold>

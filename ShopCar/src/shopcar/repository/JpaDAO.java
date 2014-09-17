@@ -18,17 +18,23 @@ import shopcar.util.Transacional;
 
 /**
  *
- * @author info1
+ * @author vFreitas
  * @param <T> The type T 
  */
 public class JpaDAO<T> implements DAO<T>, Serializable
 {
-	/* Here I inject the EntityManager, and get a new instance from EMFactory Producer method */
-    @Inject @MyDatabase private EntityManager em;
-	/* The class to be persist */
+    /* The EntityManager of my connection */
+    private final EntityManager em;
+    /* The class to be persist */
     private final Class<T> classe;
-    
-	/* Builder */
+   
+    /* Builder */
+    /**
+    *
+    * @author info1
+    * @param classe The class to that will represent T
+    * @param em A new instance of EntityManager 
+    */
     public JpaDAO(Class<T> classe, EntityManager em)
     {
         this.classe = classe;
@@ -62,7 +68,9 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     @Override
     public void update(T entity)
     {
-        
+        em.getTransaction().begin();
+        em.merge(entity);
+        em.getTransaction().commit();
     }
 
     @Override
@@ -90,6 +98,7 @@ public class JpaDAO<T> implements DAO<T>, Serializable
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     public List<T> getByRestriction(String namedQuery, String parameter, Object value)
     {
         List <T> resultList = (List<T>) em.createNamedQuery(namedQuery)

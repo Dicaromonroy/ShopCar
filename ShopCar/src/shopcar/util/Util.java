@@ -52,6 +52,6 @@ public class Util
     
     public void clear() 
     {
-        for (int i = 0; i < 40; ++i) System.out.println();
+        for (int i = 0; i < 60; ++i) System.out.println();
     }
 }

@@ -6,7 +6,7 @@
 
 package shopcar.controller;
 
-import shopcar.model.Veiculo;
+import shopcar.model.*;
 
 /**
  *
@@ -14,15 +14,22 @@ import shopcar.model.Veiculo;
  */
 public class VendaMovimento
 {
-    private Veiculo veiculo;
+    private final Veiculo veiculo;
+    private final Cliente cliente;
     
-    public VendaMovimento(Veiculo veiculo)
+    public VendaMovimento(Veiculo veiculo, Cliente cliente)
     {
         this.veiculo = veiculo;
+        this.cliente = cliente;
     }
     
     public Veiculo getVeiculo()
     {
         return this.veiculo;
+    }
+    
+    public Cliente getCliente()
+    {
+        return this.cliente;
     }
 }

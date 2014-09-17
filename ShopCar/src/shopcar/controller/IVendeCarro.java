@@ -6,19 +6,13 @@
 
 package shopcar.controller;
 
-import javax.enterprise.event.Observes;
+import shopcar.model.*;
 
 /**
  *
  * @author info1
  */
-public class VeiculoController
+public interface IVendeCarro 
 {
-    
-            
-    
-    public void recebeVenda(@Observes VendaMovimento eventVenda)
-    {
-        System.out.println(eventVenda.getVeiculo().isVendido());
-    }
+    public void Vender(Veiculo veiculo, Cliente cliente);
 }

@@ -8,20 +8,20 @@ package shopcar.controller;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import shopcar.model.Veiculo;
+import shopcar.model.*;
 
 /**
  *
  * @author info1
  */
-public class VendeCarro
+public class VendeCarro implements IVendeCarro
 {
     @Inject private Event<VendaMovimento> eventVenda;
     
-    public void Vender(Veiculo veiculo)
+    @Override
+    public void Vender(Veiculo veiculo, Cliente cliente)
     {
-        veiculo.setVendido(true);
-        eventVenda.fire(new VendaMovimento(veiculo));
+        eventVenda.fire(new VendaMovimento(veiculo, cliente));
     }
     
 }

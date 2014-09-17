@@ -25,7 +25,7 @@ import org.hibernate.validator.constraints.Range;
     @NamedQuery(name = "Veiculo.listAllVeiculoModelos",
             query = "SELECT v.modelo FROM Veiculo v"),
     @NamedQuery(name = "Veiculo.listAllVeiculosPlacas",
-            query = "SELECT v.placa FROM veiculo v")
+            query = "SELECT v.placa FROM Veiculo v")
 //    @NamedQuery(name = "Veiculo.listAllVeiculoMarcas",
 //            query = "SELECT v.marca FROM Veiculo v"),
 //    @NamedQuery(name = "Veiculo.listAllVeiculoCores",
