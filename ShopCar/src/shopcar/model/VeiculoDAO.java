@@ -6,21 +6,61 @@
 
 package shopcar.model;
 
-import javax.persistence.EntityManager;
+import java.util.List;
+import javax.inject.Inject;
 import shopcar.repository.JpaDAO;
+import shopcar.util.MyArrayList;
 
 /**
  *
- * @author info1
+ * @author Mandy Grimm
  */
-public class VeiculoDAO extends JpaDAO<Veiculo>
+public class VeiculoDAO
 {
-
-    public VeiculoDAO(Class<Veiculo> classe, EntityManager em)
+    @Inject @MyArrayList private List<Veiculo> lista;
+    @Inject private JpaDAO<Veiculo> daoListagem;
+    
+    //<editor-fold defaultstate="collapsed" desc="Selects de Listagens">
+    public List<Veiculo> listVeiculoByVendido()
     {
-        super(classe, em);
+       List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByVendido", "vendido", true);
+        return resultList;
     }
     
+    public List<Veiculo> listVeiculoByModelo(String modelo)
+    {
+        List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByModelo", "mod", modelo);
+        return resultList;
+    }
     
+    public List<Veiculo> listVeiculoByMarca(String marca)
+    {
+        List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByMarca", "marc", marca);
+        return resultList;
+    }
     
+    public List<Veiculo> listVeiculoByKm(Integer km)
+    {
+        List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByKm", "km", km);
+        return resultList;
+    }
+    
+    public List<Veiculo> listVeiculoByAno(Integer ano)
+    {
+        List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByAno", "ano", ano);
+        return resultList;
+    }
+    
+   /* public List<Veiculo> listVeiculoByTipo(String placa)
+    {
+        List<Veiculo> resultList = daoListagem.getByRestriction
+        ("Veiculo.listVeiculoByTipo", "placa", placa);
+        return resultList;
+    }*/
+//</editor-fold>
 }

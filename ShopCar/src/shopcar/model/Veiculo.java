@@ -30,6 +30,8 @@ import javax.validation.constraints.Pattern;
             query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
     @NamedQuery(name = "Veiculo.listVeiculoByVendido",
             query = "SELECT v FROM Veiculo v WHERE v.vendido = :vendido")
+            /*@NamedQuery(name = "Veiculo.listVeiculoByTipo",
+            query = "SELECT v.tipoVeiculo FROM Veiculo WHERE v.placa = :placa")*/
 })
 @Inheritance
 @DiscriminatorColumn(name = "tipoVeiculo")

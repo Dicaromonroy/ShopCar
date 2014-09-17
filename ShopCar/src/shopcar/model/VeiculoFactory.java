@@ -18,6 +18,13 @@ public class VeiculoFactory
     private VeiculoTypes veiculoType;
     
     @Produces
+    @VeiculosType(VeiculoTypes.VEICULO)
+    public Veiculo createVeiculo()
+    {
+        return new Veiculo();
+    }
+    
+    @Produces
     @VeiculosType(VeiculoTypes.MOTO)
     public Veiculo createMoto()
     {
