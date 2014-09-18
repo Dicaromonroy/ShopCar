@@ -8,7 +8,7 @@ package shopcar.repository;
 
 import java.util.List;
 import javax.inject.Inject;
-import shopcar.model.Modelo;
+import shopcar.entities.Modelo;
 import shopcar.repository.JpaDAO;
 
 /**

@@ -35,7 +35,7 @@ public class Util
     
     public String testInputString(String pattern, String error)
     {
-        String test = null;
+        String test;
    
         if(s.hasNext(pattern))
         {
@@ -46,6 +46,7 @@ public class Util
         else
         {
             System.err.println(error);
+            s.next();
             return testInputString(pattern, error);
         }
     }

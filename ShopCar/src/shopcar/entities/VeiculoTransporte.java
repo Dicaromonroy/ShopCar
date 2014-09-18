@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.entities;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Entity;
 
@@ -14,31 +15,31 @@ import javax.persistence.Entity;
  * @author Aluno
  */
 @Entity
-public class VeiculoPassageiro extends Veiculo
+public class VeiculoTransporte extends Veiculo
 {
-    private Integer numAssentos;
+     private BigDecimal capcMaxCarga;    
 
     /**
-     * @return the numAssentos
+     * @return the capcMaxCarga
      */
-    public Integer getNumAssentos()
+    public BigDecimal getCapcMaxCarga()
     {
-        return numAssentos;
+        return capcMaxCarga;
     }
 
     /**
-     * @param numAssentos the numAssentos to set
+     * @param capcMaxCarga the capcMaxCarga to set
      */
-    public void setNumAssentos(Integer numAssentos)
+    public void setCapcMaxCarga(BigDecimal capcMaxCarga)
     {
-        this.numAssentos = numAssentos;
+        this.capcMaxCarga = capcMaxCarga;
     }
 
     @Override
     public int hashCode()
     {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.numAssentos);
+        hash = 17 * hash + Objects.hashCode(this.capcMaxCarga);
         return hash;
     }
 
@@ -53,8 +54,8 @@ public class VeiculoPassageiro extends Veiculo
         {
             return false;
         }
-        final VeiculoPassageiro other = (VeiculoPassageiro) obj;
-        if (!Objects.equals(this.numAssentos, other.numAssentos))
+        final VeiculoTransporte other = (VeiculoTransporte) obj;
+        if (!Objects.equals(this.capcMaxCarga, other.capcMaxCarga))
         {
             return false;
         }

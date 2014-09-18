@@ -6,7 +6,8 @@
 
 package shopcar.controller;
 
-import shopcar.model.*;
+import shopcar.entities.Cliente;
+import shopcar.entities.Veiculo;
 
 /**
  *

@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.entities;
 
-import java.util.Set;
+import java.io.Serializable;
+import javax.persistence.Entity;
+
 
 /**
  *
- * @author info1
+ * @author Mandy Grimm
  */
-public class ItemVenda
+@Entity
+public class Moto extends VeiculoPassageiro implements Serializable
 {
-    private Long id;
-    private Veiculo veiculo;
+    
 }
+

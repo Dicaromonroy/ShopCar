@@ -8,7 +8,7 @@ package shopcar.repository;
 
 import java.util.List;
 import javax.inject.Inject;
-import shopcar.model.Veiculo;
+import shopcar.entities.Veiculo;
 import shopcar.util.MyArrayList;
 
 /**

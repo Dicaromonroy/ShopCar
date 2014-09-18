@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.repository;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import shopcar.controller.VendaMovimento;
-import shopcar.repository.JpaDAO;
+import shopcar.entities.Venda;
 
 /**
  *

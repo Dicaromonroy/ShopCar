@@ -6,9 +6,10 @@
 
 package shopcar.controller;
 
+import shopcar.entities.Cliente;
+import shopcar.entities.Veiculo;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import shopcar.model.*;
 
 /**
  *

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package shopcar.repository;
+package shopcar.factories;
 
 
 import javax.enterprise.context.ApplicationScoped;

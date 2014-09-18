@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-
+import javax.persistence.*;
 
 /**
  *
  * @author Mandy Grimm
  */
 @Entity
-public class Onibus extends VeiculoPassageiro implements Serializable
+public class Caminhao extends VeiculoTransporte implements Serializable
 {
     
 }

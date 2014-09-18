@@ -8,7 +8,7 @@ package shopcar.controller;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import shopcar.model.Veiculo;
+import shopcar.entities.Veiculo;
 import shopcar.repository.JpaDAO;
 
 /**

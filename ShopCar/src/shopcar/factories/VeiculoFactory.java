@@ -4,9 +4,16 @@
  * and open the template in the editor.
  */
 
-package shopcar.model;
+package shopcar.factories;
 
 import javax.enterprise.inject.Produces;
+import shopcar.entities.Caminhao;
+import shopcar.entities.Caminhonete;
+import shopcar.entities.Carro;
+import shopcar.entities.Moto;
+import shopcar.entities.Onibus;
+import shopcar.entities.Veiculo;
+import shopcar.entities.VeiculoTypes;
 import shopcar.util.VeiculosType;
 
 /**

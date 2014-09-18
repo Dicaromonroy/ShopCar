@@ -8,7 +8,7 @@ import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 import javax.inject.Qualifier;
-import shopcar.model.VeiculoTypes;
+import shopcar.entities.VeiculoTypes;
 
 @Qualifier
 @Retention(RUNTIME)

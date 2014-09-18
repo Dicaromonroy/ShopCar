@@ -4,16 +4,13 @@
  * and open the template in the editor.
  */
 
-package shopcar.util;
+package shopcar.factories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
-import shopcar.view.CadastroVeiculo;
+import shopcar.util.MyArrayList;
 
 /**
  *
@@ -23,7 +20,7 @@ import shopcar.view.CadastroVeiculo;
 public class UtilFactory<T,I>
 {  
     @Produces
-    public static Scanner createScaner()
+    public Scanner createScaner()
     {
         return new Scanner(System.in);
     }

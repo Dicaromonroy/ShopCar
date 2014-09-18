@@ -6,6 +6,10 @@
 
 package shopcar.view;
 
+import shopcar.entities.Marca;
+import shopcar.entities.Modelo;
+import shopcar.entities.Veiculo;
+import shopcar.entities.Cor;
 import shopcar.repository.ModeloDAO;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
@@ -14,7 +18,6 @@ import java.util.Map;
 import java.util.Scanner;
 import javax.inject.Inject;
 import shopcar.controller.Validator;
-import shopcar.model.*;
 import shopcar.repository.JpaDAO;
 import shopcar.util.*;
 
@@ -115,8 +118,6 @@ public class CadastroVeiculo
                     ,BigDecimal.class, 1);
             
             System.out.println("-------------------------------");
-            System.out.println(veiculo.getPlaca());
-            System.out.println(veiculo.getMarca().getMarca());
             daoCadastro.save(veiculo);
             System.out.println("Veiculo cadastrado com sucesso!");
         } 

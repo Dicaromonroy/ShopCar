@@ -6,9 +6,10 @@
 
 package shopcar.view;
 
+import shopcar.entities.Cliente;
+import shopcar.entities.Veiculo;
 import javax.inject.Inject;
 import shopcar.controller.VendeCarro;
-import shopcar.model.*;
 import shopcar.repository.JpaDAO;
 
 /**
