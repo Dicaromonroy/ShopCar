@@ -82,7 +82,7 @@ public class Principal
                             throw new UnsupportedOperationException("Not implemented yet");
                     }
                 break;
-                case 5:
+                case 4:
                     if(testPlaca())
                         vendaVeiculo.Vender(veiculoPlaca);
                     break;

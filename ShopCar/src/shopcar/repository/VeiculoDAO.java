@@ -73,7 +73,7 @@ public class VeiculoDAO
         } 
         catch (Exception e)
         {
-            System.err.println("Houve erro ao listar a placas! " + e.getCause());
+            System.err.println("Houve erro ao listar a placas! " + e.getMessage());
         }
         
         for(String s : placas) 
