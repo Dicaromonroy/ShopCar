@@ -17,7 +17,6 @@ import shopcar.util.*;
  *
  * @author info1
  */
-@ApplicationScoped
 public class Principal
 {
     @Inject private Util util;
@@ -33,8 +32,7 @@ public class Principal
 
     public Principal() { }
     
-    //<editor-fold defaultstate="collapsed" desc="Menu Principal">
-    public void MenuPrincipal()
+    public int MenuPrincipal()
     {
         for (int i = 0; i < 40; ++i) System.out.println();
         System.out.println("         *** ShopCar ***");
@@ -54,8 +52,9 @@ public class Principal
         catch (Exception e)
         {
             util.clear();
-            System.out.println(e.getMessage());
+            return MenuPrincipal();
         }
+        return 0;
     }
     
     public void nextMenu(String from,int escolha)
@@ -66,28 +65,47 @@ public class Principal
             {
                 case 1: 
                     if(!testPlaca())
-                    {
-                        util.clear();
                         cadastroVeiculo.saveVeiculo(veiculoPlaca);
-                    }
                     else
                     {
                         System.out.println("Esta placa já está cadastrada! "
                                 + "Deseja ver a ficha deste Veiculo? [s/n]");
                         String test = s.nextLine();
                         if(test.equalsIgnoreCase("s"))
-                            //chamaficha;
-                            throw new UnsupportedOperationException("Not implemented yet");
+                            listagem.fichaVeiculo(veiculoPlaca);
+                        else
+                            MenuPrincipal();
                     }
-                break;
+                    break;
+                    
+                case 2:
+                    MenuDeListagem();
+                    break;
+                    
+                case 3:
+                    if(testPlaca())
+                        listagem.fichaVeiculo(veiculoPlaca);
+                    else
+                    {
+                        System.out.println("Esse Veiculo ainda não foi cadastrado! "
+                                + "Deseja cadastrar um veiculo com a Placa digitada? [s/n]");
+                        String test = s.nextLine();
+                        if(test.equalsIgnoreCase("s"))
+                            cadastroVeiculo.saveVeiculo(veiculoPlaca);
+                        else
+                            MenuPrincipal();
+                    }
+                    break;
+                    
                 case 4:
                     if(testPlaca())
                         vendaVeiculo.Vender(veiculoPlaca);
                     break;
+                case 5:
+                    System.exit(0);
             }
         }
     }
-//</editor-fold>
     
     private boolean testPlaca()
     {
@@ -105,11 +123,12 @@ public class Principal
         {
             System.out.println("Formato de placa errado! ");
             s.next();
+            util.clear();
             return testPlaca();
         }
     }
-    //<editor-fold defaultstate="collapsed" desc="Menu de Listagem">
-    public void MenuDeListagem()
+    
+    public int MenuDeListagem()
     {
         for (int i = 0; i < 40; ++i) System.out.println();
         System.out.println("         *** ShopCar ***");
@@ -124,40 +143,37 @@ public class Principal
         System.out.println("Escolha a opção desejada: ");
         try
         {
-            nextMenuListagem("listarVeiculo",util.testInput("[1-6]", "Opção errada!"));
+            nextMenuListagem(util.testInput("[1-6]", "Opção errada!"));
             
         }
         catch (Exception e)
         {
             util.clear();
-            System.out.println("Caiu aquêêêêh" + e.getMessage());
+            return MenuDeListagem();
         }
+        return 0;
     }
-    public void nextMenuListagem(String from,int escolha)
+    public void nextMenuListagem(int escolha)
     {
-        if(from.equalsIgnoreCase("listarVeiculo"))
+        switch(escolha)
         {
-            switch(escolha)
-            {
-                case 1:
-                    listagem.listagemMarca();
-                    break;
-                case 2:
-                    listagem.listagemModelo();
-                    break;
-                case 3:
-                    listagem.listagemAno();
-                    break;
-                case 4:
-                    listagem.listagemKM();
-                    break;
-                case 5:
-                    listagem.listagemVendidos();
-                    break;
-                case 6:
-                    System.exit(0);
-            }
+            case 1:
+                listagem.listagemMarca();
+                break;
+            case 2:
+                listagem.listagemModelo();
+                break;
+            case 3:
+                listagem.listagemAno();
+                break;
+            case 4:
+                listagem.listagemKM();
+                break;
+            case 5:
+                listagem.listagemVendidos();
+                break;
+            case 6:
+                System.exit(0);
         }
     }
-//</editor-fold>
 }

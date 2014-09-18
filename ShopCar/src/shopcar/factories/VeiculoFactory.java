@@ -14,7 +14,7 @@ import shopcar.entities.Moto;
 import shopcar.entities.Onibus;
 import shopcar.entities.Veiculo;
 import shopcar.entities.VeiculoTypes;
-import shopcar.util.VeiculosType;
+import shopcar.qualifiers.VeiculosType;
 
 /**
  *
@@ -23,6 +23,13 @@ import shopcar.util.VeiculosType;
 public class VeiculoFactory
 {
     private VeiculoTypes veiculoType;
+    
+    @Produces
+    @VeiculosType(VeiculoTypes.VEICULO)
+    public Veiculo createVeiculo()
+    {
+        return new Veiculo();
+    }
     
     @Produces
     @VeiculosType(VeiculoTypes.MOTO)

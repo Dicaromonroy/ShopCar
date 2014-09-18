@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import shopcar.util.MyDatabase;
+import shopcar.qualifiers.MyDatabase;
 import shopcar.util.Transacional;
 
 

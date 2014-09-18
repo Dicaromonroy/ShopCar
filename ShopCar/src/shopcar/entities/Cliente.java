@@ -18,6 +18,8 @@ import javax.persistence.*;
 @Entity
 public class Cliente implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue
     private Long clienteId;

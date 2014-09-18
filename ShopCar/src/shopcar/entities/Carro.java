@@ -18,6 +18,8 @@ import javax.persistence.Entity;
 @Entity
 public class Carro extends VeiculoPassageiro implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+    
     private String carroceria;
     private Integer numeroPortas;
 

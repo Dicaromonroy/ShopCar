@@ -16,5 +16,5 @@ import javax.persistence.*;
 @Entity
 public class Caminhao extends VeiculoTransporte implements Serializable
 {
-    
+    private static final Long serialVersionUID = 1L;
 }

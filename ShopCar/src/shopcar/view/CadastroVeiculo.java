@@ -6,6 +6,7 @@
 
 package shopcar.view;
 
+import shopcar.qualifiers.MyArrayList;
 import shopcar.entities.Marca;
 import shopcar.entities.Modelo;
 import shopcar.entities.Veiculo;
@@ -134,7 +135,6 @@ public class CadastroVeiculo
             String porpertyName ,Class propertyClass, Integer methodInheritanceHierarchy) throws  
             IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
-        String err;
         System.out.println(question);
         Object b = getPropertyClassInput(propertyClass);
         Class clazz = obj.getClass();
@@ -231,7 +231,7 @@ public class CadastroVeiculo
                 {
                     try
                     {
-                        Object c = Class.forName("shopcar.model." + s)
+                        Object c = Class.forName("shopcar.entities." + s)
                                 .newInstance();
                         return (Veiculo) c;
                     } 

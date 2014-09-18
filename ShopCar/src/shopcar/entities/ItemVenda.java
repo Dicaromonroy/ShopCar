@@ -14,6 +14,8 @@ import java.util.Set;
  */
 public class ItemVenda
 {
+    private static final Long serialVersionUID = 1L;
+    
     private Long id;
     private Veiculo veiculo;
 }

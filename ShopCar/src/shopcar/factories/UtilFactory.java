@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import javax.enterprise.inject.Produces;
-import shopcar.util.MyArrayList;
+import shopcar.qualifiers.MyArrayList;
 
 /**
  *

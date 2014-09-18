@@ -19,6 +19,8 @@ import shopcar.controller.VendaMovimento;
 @Entity
 public class Venda implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue
     private Long id;

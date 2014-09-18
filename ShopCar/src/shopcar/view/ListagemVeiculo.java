@@ -9,10 +9,12 @@ package shopcar.view;
 import java.util.List;
 import javax.inject.Inject;
 import shopcar.entities.Veiculo;
+import shopcar.entities.VeiculoTypes;
 import shopcar.repository.JpaDAO;
 import shopcar.repository.VeiculoDAO;
-import shopcar.util.MyArrayList;
+import shopcar.qualifiers.MyArrayList;
 import shopcar.util.Util;
+import shopcar.qualifiers.VeiculosType;
 
 /**
  *
@@ -22,10 +24,10 @@ public class ListagemVeiculo
 {
     @Inject private JpaDAO<Veiculo> daoListagem;
     private String idVeiculo;
-    @Inject private VeiculoDAO vrn;
+    @Inject private VeiculoDAO vdao;
     @Inject private Util util;
     @Inject @MyArrayList private List<Veiculo> listados;
-    private Veiculo v = new Veiculo();
+    @Inject @VeiculosType(VeiculoTypes.VEICULO) private Veiculo v;
     
     //<editor-fold defaultstate="collapsed" desc="Listar por Modelo">
     public void listagemModelo()
@@ -37,7 +39,7 @@ public class ListagemVeiculo
         try
         {
             nomeModelo = util.testInputString("[a-z-A-Z]");
-            listados = vrn.listVeiculoByModelo(nomeModelo);
+            listados = vdao.listVeiculoByModelo(nomeModelo);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -67,7 +69,7 @@ public class ListagemVeiculo
         try
         {
             nomeMarca = util.testInputString("[a-z-A-Z]");
-            listados = vrn.listVeiculoByMarca(nomeMarca);
+            listados = vdao.listVeiculoByMarca(nomeMarca);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -99,7 +101,7 @@ public class ListagemVeiculo
         try
         {
             anoFabricacao = util.testInput("[0-9]{4}", "Ano errado!");
-            listados = vrn.listVeiculoByAno(anoFabricacao);
+            listados = vdao.listVeiculoByAno(anoFabricacao);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -129,7 +131,7 @@ public class ListagemVeiculo
         try
         {
             km = util.testInput("[0-9]{5}|[0-9]{4}|[0]{1}", "Quilometragem errada!");
-            listados = vrn.listVeiculoByKm(km);
+            listados = vdao.listVeiculoByKm(km);
             
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
@@ -154,7 +156,7 @@ public class ListagemVeiculo
     {
         try
         {
-            listados = vrn.listVeiculoByVendido();
+            listados = vdao.listVeiculoByVendido();
             System.out.println("         *** ShopCar ***");
             System.out.println("-------------------------------");
             System.out.println("");

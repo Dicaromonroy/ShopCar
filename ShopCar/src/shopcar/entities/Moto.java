@@ -17,6 +17,6 @@ import javax.persistence.Entity;
 @Entity
 public class Moto extends VeiculoPassageiro implements Serializable
 {
-    
+    private static final Long serialVersionUID = 1L;
 }
 

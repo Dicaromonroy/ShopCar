@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package shopcar.entities;
 
 import java.io.Serializable;
@@ -11,7 +5,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.Range;
 
 /**
  *
@@ -30,25 +23,53 @@ import org.hibernate.validator.constraints.Range;
     @NamedQuery(name = "Veiculo.listVeiculoByKm",
             query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
     @NamedQuery(name = "Veiculo.listVeiculoByVendido",
-            query = "SELECT v FROM Veiculo v WHERE v.vendido = :vendido")
+            query = "SELECT v FROM Veiculo v WHERE v.vendido = :vendido"),
+    @NamedQuery(name = "Veiculo.listAllVeiculosPlacas",
+            query = "SELECT v.placa FROM Veiculo v")
 })
 @Inheritance
 @DiscriminatorColumn(name = "tipoVeiculo")
 public class Veiculo implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+    
+    public static final String ALL_VEICULOS_TYPES = "Veiculo.listAllVeiculosTypes";
+    public static final String VEICULO_BY_MODELO = "Veiculo.listVeiculoByModelo";
+    public static final String VEICULO_BY_MARCA = "Veiculo.listVeiculoByMarca";
+    public static final String VEICULO_BY_ANO = "Veiculo.listVeiculoByAno";
+    public static final String VEICULO_BY_KM = "Veiculo.listVeiculoByKm";
+    public static final String VEICULO_BY_VENDIDO = "Veiculo.listVeiculoByVendido";
+    public static final String ALL_VEICULOS_PLACAS = "Veiculo.listAllVeiculosPlacas";
+    
     @Id
-    //@Pattern(regexp = "[A-Z]{3}-\\d{4}", message = 
-    //        "A Placa deve obedecer o formato ABC-1234!")
+    @Pattern(regexp = "[A-Z]{3}-\\d{4}$", message = 
+            "A Placa deve obedecer o formato ABC-1234!")
     private String placa;
+    @Pattern(regexp = "[A-Z0-9]{11}[0-9]{6}", message = "O Número de Chassi"
+            + " deve possuir 17 dígitos/letras, sendo os últimos 6 o número de"
+            + " série!")
+    @NotNull
     private String chassi;
-    @Digits(integer = 4, fraction = 4 , message = "Um ano não pode ter mais do que 4 dígitos!")
+    @Digits(integer = 4,  fraction = 3, message = "Não pode ter do que 4 dígitos!")
+    @NotNull
     private Integer anoFabricacao;
+    @NotNull
     private Integer quilometragem;
+    @NotNull
     private BigDecimal valorVeiculo; 
+    @NotNull
     private Integer potenciaCV;
+    @NotNull
     private String cilindradas;
+    @Min(1)
+    @Max(10)
+    @NotNull
     private Integer numeroEixos;
+    @Min(2)
+    @Max(20)
+    @NotNull
     private Integer numeroMarchas;
+    @NotNull
     private boolean vendido;
     @OneToOne
     private Cor cor;
@@ -281,8 +302,4 @@ public class Veiculo implements Serializable
     }
     
 //</editor-fold>
-
-    
-
-    
 }

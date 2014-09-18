@@ -24,7 +24,7 @@ public class ModeloDAO
     public List<Modelo> listAllModelosByMarca(Object value)
     {
         List<Modelo> resultList = daoModelo.getByRestriction
-        ("Modelo.listAllModelosByMarca", "marca" , value);
+        (Modelo.MODELOS_BY_MARCA, "marca" , value);
         
         return resultList;
     }

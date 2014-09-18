@@ -12,7 +12,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import shopcar.repository.JpaDAO;
-import shopcar.util.MyDatabase;
+import shopcar.qualifiers.MyDatabase;
 
 
 

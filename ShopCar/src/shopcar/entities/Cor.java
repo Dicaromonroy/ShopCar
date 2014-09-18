@@ -19,6 +19,8 @@ import javax.persistence.*;
 @Entity
 public class Cor implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue
     private Integer corId;

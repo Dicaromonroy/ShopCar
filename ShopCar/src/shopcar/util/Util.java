@@ -29,6 +29,7 @@ public class Util
         else
         {
             System.err.println(error);
+            s.next();
             return null;
         }
     }

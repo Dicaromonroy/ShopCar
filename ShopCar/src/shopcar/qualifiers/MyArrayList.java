@@ -1,4 +1,4 @@
-package shopcar.util;
+package shopcar.qualifiers;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;

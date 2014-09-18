@@ -22,6 +22,10 @@ import javax.persistence.*;
         query = "SELECT m FROM Modelo m WHERE m.marca = :marca")})
 public class Modelo implements Serializable
 {
+    private static final Long serialVersionUID = 1L;
+    
+    public static final String MODELOS_BY_MARCA = "Modelo.listAllModelosByMarca";
+    
     @Id
     @GeneratedValue
     private Integer modeloId;

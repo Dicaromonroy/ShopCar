@@ -1,5 +1,6 @@
 package shopcar.util;
 
+import shopcar.qualifiers.MyDatabase;
 import java.io.Serializable;
 
 import javax.annotation.Priority;
