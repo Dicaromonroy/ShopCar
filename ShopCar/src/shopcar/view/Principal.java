@@ -8,7 +8,6 @@ package shopcar.view;
 
 import java.util.Scanner;
 import javax.enterprise.context.ApplicationScoped;
-
 import javax.inject.*;
 import shopcar.controller.*;
 import shopcar.repository.VeiculoDAO;
@@ -28,14 +27,13 @@ public class Principal
     @Inject private VeiculoVendaController veiculoController;
     @Inject private VeiculoDAO veiculoDAO;
     @Inject private Scanner s;
+    @Inject private ListagemVeiculo listagem;
     private String veiculoPlaca;
     
 
-    
-    
-    
     public Principal() { }
     
+    //<editor-fold defaultstate="collapsed" desc="Menu Principal">
     public void MenuPrincipal()
     {
         for (int i = 0; i < 40; ++i) System.out.println();
@@ -44,7 +42,7 @@ public class Principal
         System.out.println("1 - Cadastrar Veiculos");
         System.out.println("2 - Listar Veiculos");
         System.out.println("3 - Ficha Veiculo");
-        System.out.println("4- Vender Veiculo");
+        System.out.println("4 - Vender Veiculo");
         System.out.println("5- Sair");
         System.out.println("");
         System.out.println("Escolha a opção desejada: ");
@@ -86,11 +84,10 @@ public class Principal
                     if(testPlaca())
                         vendaVeiculo.Vender(veiculoPlaca);
                     break;
-                    
-                
             }
         }
     }
+//</editor-fold>
     
     private boolean testPlaca()
     {
@@ -111,4 +108,56 @@ public class Principal
             return testPlaca();
         }
     }
+    //<editor-fold defaultstate="collapsed" desc="Menu de Listagem">
+    public void MenuDeListagem()
+    {
+        for (int i = 0; i < 40; ++i) System.out.println();
+        System.out.println("         *** ShopCar ***");
+        System.out.println("-------------------------------");
+        System.out.println("1 - Listar Veículos por Marca.");
+        System.out.println("2 - Listar Veículos por Modelo.");
+        System.out.println("3 - Listar Veículos por Ano de Fabricação.");
+        System.out.println("4 - Listar Veículos por Quilometragem.");
+        System.out.println("5 - Listar Veículos não Vendidos");
+        System.out.println("6 - Sair");
+        System.out.println("");
+        System.out.println("Escolha a opção desejada: ");
+        try
+        {
+            nextMenuListagem("listarVeiculo",util.testInput("[1-6]", "Opção errada!"));
+            
+        }
+        catch (Exception e)
+        {
+            util.clear();
+            System.out.println("Caiu aquêêêêh" + e.getMessage());
+        }
+    }
+    public void nextMenuListagem(String from,int escolha)
+    {
+        if(from.equalsIgnoreCase("listarVeiculo"))
+        {
+            switch(escolha)
+            {
+                case 1:
+                    listagem.listagemMarca();
+                    break;
+                case 2:
+                    listagem.listagemModelo();
+                    break;
+                case 3:
+                    listagem.listagemAno();
+                    break;
+                case 4:
+                    listagem.listagemKM();
+                    break;
+                case 5:
+                    listagem.listagemVendidos();
+                    break;
+                case 6:
+                    System.exit(0);
+            }
+        }
+    }
+//</editor-fold>
 }

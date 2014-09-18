@@ -55,4 +55,18 @@ public class Util
     {
         for (int i = 0; i < 60; ++i) System.out.println();
     }
+    
+    public String testInputString(String pattern) throws Exception
+    {
+        String test = null;
+        //System.out.println("@@" + pattern);
+        if(s.hasNext())
+        {
+            test = s.nextLine();
+            clear();
+            return test;
+        }
+        else
+           throw new Exception("Conteudo inválido!");
+    }
 }

@@ -8,7 +8,6 @@ package shopcar.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -22,16 +21,17 @@ import org.hibernate.validator.constraints.Range;
 @NamedQueries({
     @NamedQuery(name = "Veiculo.listAllVeiculosTypes",
             query= "SELECT DISTINCT v.class FROM Veiculo v"),
-    @NamedQuery(name = "Veiculo.listAllVeiculoModelos",
-            query = "SELECT v.modelo FROM Veiculo v"),
-    @NamedQuery(name = "Veiculo.listAllVeiculosPlacas",
-            query = "SELECT v.placa FROM Veiculo v")
-//    @NamedQuery(name = "Veiculo.listAllVeiculoMarcas",
-//            query = "SELECT v.marca FROM Veiculo v"),
-//    @NamedQuery(name = "Veiculo.listAllVeiculoCores",
-//            query = "SELECT v.cor FROM Veiculo v")
+    @NamedQuery(name = "Veiculo.listVeiculoByModelo",
+            query = "SELECT v FROM Veiculo v WHERE v.modelo.modelo = :mod"),
+    @NamedQuery(name = "Veiculo.listVeiculoByMarca",
+            query = "SELECT v FROM Veiculo v WHERE v.marca.marca = :marc"),
+    @NamedQuery(name = "Veiculo.listVeiculoByAno",
+            query = "SELECT v FROM Veiculo v WHERE v.anoFabricacao = :ano"),
+    @NamedQuery(name = "Veiculo.listVeiculoByKm",
+            query = "SELECT v FROM Veiculo v WHERE v.quilometragem = :km"),
+    @NamedQuery(name = "Veiculo.listVeiculoByVendido",
+            query = "SELECT v FROM Veiculo v WHERE v.vendido = :vendido")
 })
-
 @Inheritance
 @DiscriminatorColumn(name = "tipoVeiculo")
 public class Veiculo implements Serializable
