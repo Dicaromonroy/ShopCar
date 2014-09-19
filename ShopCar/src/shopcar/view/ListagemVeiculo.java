@@ -212,7 +212,7 @@ public class ListagemVeiculo
             System.out.println("| Ano de Fabricação: " + v.getAnoFabricacao());
             System.out.println("| Valor: " + v.getValorVeiculo());
             System.out.println("---------------------------------");
-            System.out.println("| Chassi: " + v.getChassi());
+            System.out.println("| Nº.Chassi: " + v.getChassi());
             System.out.println("| Cilindradas: " + v.getCilindradas());
             System.out.println("| Número de Eixos: " + v.getNumeroEixos());
             System.out.println("| Número de Marchas: " + v.getNumeroMarchas());

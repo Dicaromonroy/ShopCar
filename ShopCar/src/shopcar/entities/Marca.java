@@ -9,6 +9,7 @@ package shopcar.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import javax.inject.Inject;
 import javax.persistence.*;
 
 
@@ -25,10 +26,10 @@ public class Marca implements Serializable
     @GeneratedValue
     private Integer marcaId;
     private String marca;
-    @OneToMany(mappedBy = "placa")
+    @OneToMany(mappedBy = "marca")
     private Set<Veiculo> veiculos;
     @OneToMany(mappedBy = "marca")
-    private Set<Modelo> modelos;
+    @Inject private Set<Modelo> modelos;
 
     //<editor-fold defaultstate="collapsed" desc="Hash and Equals">
     @Override

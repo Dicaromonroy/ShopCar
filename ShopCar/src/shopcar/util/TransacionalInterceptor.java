@@ -16,7 +16,6 @@ import javax.persistence.EntityTransaction;
 @Priority(Interceptor.Priority.APPLICATION + 1)
 public class TransacionalInterceptor implements Serializable 
 {
-
     private static final long serialVersionUID = 1L;
 
     @Inject @MyDatabase

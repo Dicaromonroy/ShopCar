@@ -9,6 +9,7 @@ package shopcar.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
+import javax.inject.Inject;
 import javax.persistence.*;
 
 

@@ -6,9 +6,7 @@
 
 package shopcar.factories;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 import javax.enterprise.inject.Produces;
 import shopcar.qualifiers.MyArrayList;
 
@@ -42,5 +40,11 @@ public class UtilFactory<T,I>
     public HashMap createHash()
     {
         return new HashMap<>();
+    }
+    
+    @Produces 
+    public HashSet<T> createSet()
+    {
+        return new HashSet<>();
     }
 }

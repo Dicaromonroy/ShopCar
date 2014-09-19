@@ -26,7 +26,7 @@ public class Cliente implements Serializable
     private String nome;
     
     @OneToMany(mappedBy = "cliente")
-    private Set<Venda> pedidos;
+    private Set<Pedido> pedidos;
 
     //<editor-fold defaultstate="collapsed" desc="Getters e Setters">
     /**
@@ -64,7 +64,7 @@ public class Cliente implements Serializable
     /**
      * @return the pedidos
      */
-    public Set<Venda> getPedidos()
+    public Set<Pedido> getPedidos()
     {
         return pedidos;
     }
@@ -72,7 +72,7 @@ public class Cliente implements Serializable
     /**
      * @param pedidos the pedidos to set
      */
-    public void setPedidos(Set<Venda> pedidos)
+    public void setPedidos(Set<Pedido> pedidos)
     {
         this.pedidos = pedidos;
     }

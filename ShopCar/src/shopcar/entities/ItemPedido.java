@@ -6,16 +6,25 @@
 
 package shopcar.entities;
 
-import java.util.Set;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.*;
 
 /**
  *
  * @author info1
  */
-public class ItemVenda
+@Entity
+public class ItemPedido implements Serializable
 {
     private static final Long serialVersionUID = 1L;
     
-    private Long id;
+    @Id
+    @GeneratedValue
+    private Long itemPedidoId;
+    
+    
     private Veiculo veiculo;
+    
+    private BigDecimal precoItem;
 }

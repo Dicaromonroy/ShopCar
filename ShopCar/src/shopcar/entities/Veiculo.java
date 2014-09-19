@@ -3,6 +3,7 @@ package shopcar.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -77,6 +78,8 @@ public class Veiculo implements Serializable
     private Marca marca;
     @OneToOne
     private Modelo modelo;
+    @OneToMany(mappedBy = "veiculo")
+    private Set<ItemPedido> itemPedido;
 
     //<editor-fold defaultstate="collapsed" desc="Hash and Equals">
     @Override

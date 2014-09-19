@@ -17,18 +17,18 @@ import shopcar.controller.VendaMovimento;
  * @author info1
  */
 @Entity
-public class Venda implements Serializable
+public class Pedido implements Serializable
 {
     private static final Long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue
-    private Long id;
+    private Long pedidoId;
     
     @ManyToOne
     private Cliente cliente;
     @Transient
-    private ItemVenda itemVenda;
+    private ItemPedido itemPedido;
 
     //<editor-fold defaultstate="collapsed" desc="Getters e Setters">
     /**
@@ -36,7 +36,7 @@ public class Venda implements Serializable
      */
     public Long getId()
     {
-        return id;
+        return pedidoId;
     }
     
     /**
@@ -44,7 +44,7 @@ public class Venda implements Serializable
      */
     public void setId(Long id)
     {
-        this.id = id;
+        this.pedidoId = id;
     }
     
     /**
@@ -66,17 +66,17 @@ public class Venda implements Serializable
     /**
      * @return the itemVenda
      */
-    public ItemVenda getItemVenda()
+    public ItemPedido getItemVenda()
     {
-        return itemVenda;
+        return itemPedido;
     }
     
     /**
      * @param itemVenda the itemVenda to set
      */
-    public void setItemVenda(ItemVenda itemVenda)
+    public void setItemVenda(ItemPedido itemVenda)
     {
-        this.itemVenda = itemVenda;
+        this.itemPedido = itemVenda;
     }
 
 //</editor-fold>
@@ -86,9 +86,9 @@ public class Venda implements Serializable
     public int hashCode()
     {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.pedidoId);
         hash = 23 * hash + Objects.hashCode(this.cliente);
-        hash = 23 * hash + Objects.hashCode(this.itemVenda);
+        hash = 23 * hash + Objects.hashCode(this.itemPedido);
         return hash;
     }
     
@@ -103,8 +103,8 @@ public class Venda implements Serializable
         {
             return false;
         }
-        final Venda other = (Venda) obj;
-        if (!Objects.equals(this.id, other.id))
+        final Pedido other = (Pedido) obj;
+        if (!Objects.equals(this.pedidoId, other.pedidoId))
         {
             return false;
         }
@@ -112,7 +112,7 @@ public class Venda implements Serializable
         {
             return false;
         }
-        if (!Objects.equals(this.itemVenda, other.itemVenda))
+        if (!Objects.equals(this.itemPedido, other.itemPedido))
         {
             return false;
         }

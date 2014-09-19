@@ -9,7 +9,7 @@ package shopcar.repository;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import shopcar.controller.VendaMovimento;
-import shopcar.entities.Venda;
+import shopcar.entities.Pedido;
 
 /**
  *
@@ -17,8 +17,8 @@ import shopcar.entities.Venda;
  */
 public class VendaDAO
 {
-    @Inject private JpaDAO<Venda> daoVenda;
-    @Inject private Venda v;
+    @Inject private JpaDAO<Pedido> daoVenda;
+    @Inject private Pedido v;
     
     public void recebeVenda(@Observes VendaMovimento eventVenda)
     {

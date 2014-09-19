@@ -7,7 +7,6 @@
 package shopcar.view;
 
 import java.util.Scanner;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.*;
 import shopcar.controller.*;
 import shopcar.repository.VeiculoDAO;
@@ -47,7 +46,7 @@ public class Principal
         
         try
         {
-            nextMenu("menuprincipal",util.testInput("[1-5]", "Opção inválida!"));
+            nextMenu(util.testInput("[1-5]", "Opção inválida!"));
         } 
         catch (Exception e)
         {
@@ -57,53 +56,50 @@ public class Principal
         return 0;
     }
     
-    public void nextMenu(String from,int escolha)
+    public void nextMenu(int escolha)
     {
-        if(from.equalsIgnoreCase("menuprincipal"))
+        switch(escolha)
         {
-            switch(escolha)
-            {
-                case 1: 
-                    if(!testPlaca())
-                        cadastroVeiculo.saveVeiculo(veiculoPlaca);
-                    else
-                    {
-                        System.out.println("Esta placa já está cadastrada! "
-                                + "Deseja ver a ficha deste Veiculo? [s/n]");
-                        String test = s.nextLine();
-                        if(test.equalsIgnoreCase("s"))
-                            listagem.fichaVeiculo(veiculoPlaca);
-                        else
-                            MenuPrincipal();
-                    }
-                    break;
-                    
-                case 2:
-                    MenuDeListagem();
-                    break;
-                    
-                case 3:
-                    if(testPlaca())
+            case 1: 
+                if(!testPlaca())
+                    cadastroVeiculo.saveVeiculo(veiculoPlaca);
+                else
+                {
+                    System.out.println("Esta placa já está cadastrada! "
+                            + "Deseja ver a ficha deste Veiculo? [s/n]");
+                    String test = s.nextLine();
+                    if(test.equalsIgnoreCase("s"))
                         listagem.fichaVeiculo(veiculoPlaca);
                     else
-                    {
-                        System.out.println("Esse Veiculo ainda não foi cadastrado! "
-                                + "Deseja cadastrar um veiculo com a Placa digitada? [s/n]");
-                        String test = s.nextLine();
-                        if(test.equalsIgnoreCase("s"))
-                            cadastroVeiculo.saveVeiculo(veiculoPlaca);
-                        else
-                            MenuPrincipal();
-                    }
-                    break;
-                    
-                case 4:
-                    if(testPlaca())
-                        vendaVeiculo.Vender(veiculoPlaca);
-                    break;
-                case 5:
-                    System.exit(0);
-            }
+                        MenuPrincipal();
+                }
+                break;
+
+            case 2:
+                MenuDeListagem();
+                break;
+
+            case 3:
+                if(testPlaca())
+                    listagem.fichaVeiculo(veiculoPlaca);
+                else
+                {
+                    System.out.println("Esse Veiculo ainda não foi cadastrado! "
+                            + "Deseja cadastrar um veiculo com a Placa digitada? [s/n]");
+                    String test = s.nextLine();
+                    if(test.equalsIgnoreCase("s"))
+                        cadastroVeiculo.saveVeiculo(veiculoPlaca);
+                    else
+                        MenuPrincipal();
+                }
+                break;
+
+            case 4:
+                if(testPlaca())
+                    vendaVeiculo.Vender(veiculoPlaca);
+                break;
+            case 5:
+                System.exit(0);
         }
     }
     

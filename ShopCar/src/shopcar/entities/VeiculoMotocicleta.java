@@ -6,17 +6,11 @@
 
 package shopcar.entities;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-
-
 /**
  *
- * @author Mandy Grimm
+ * @author Aluno
  */
-@Entity
-public class Moto extends VeiculoMotocicleta implements Serializable
+public class VeiculoMotocicleta extends Veiculo
 {
-    private static final Long serialVersionUID = 1L;
+    
 }
-

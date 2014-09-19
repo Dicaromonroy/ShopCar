@@ -9,8 +9,9 @@ package shopcar.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Entity;
+import javax.inject.Inject;
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  *
@@ -31,8 +32,8 @@ public class Modelo implements Serializable
     private Integer modeloId;
     private String modelo;
     private String versao;
-    @OneToMany(mappedBy = "placa")
-    private Set<Veiculo> veiculo;
+    @OneToMany(mappedBy = "modelo")
+    @Inject private Set<Veiculo> veiculo;
     @ManyToOne
     private Marca marca;
 
