@@ -8,11 +8,7 @@ package shopcar.repository;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import shopcar.qualifiers.MyDatabase;
 import shopcar.util.Transacional;
 
 
@@ -60,11 +56,12 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     @Transacional
     public void save(T entity)
     {
+        //em.getTransaction().begin();
         em.persist(entity);
+        //em.getTransaction().commit();
     }
 
     @Override
-    @Transacional
     public void update(T entity)
     {
         em.getTransaction().begin();

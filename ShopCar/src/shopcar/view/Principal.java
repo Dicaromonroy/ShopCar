@@ -31,7 +31,7 @@ public class Principal
 
     public Principal() { }
     
-    public int MenuPrincipal()
+    public int MenuPrincipal(String err)
     {
         for (int i = 0; i < 40; ++i) System.out.println();
         System.out.println("         *** ShopCar ***");
@@ -42,16 +42,17 @@ public class Principal
         System.out.println("4 - Vender Veiculo");
         System.out.println("5- Sair");
         System.out.println("");
+        System.err.println(err);
         System.out.println("Escolha a opção desejada: ");
         
         try
         {
-            nextMenu(util.testInput("[1-5]", "Opção inválida!"));
+            nextMenu(util.testInput("[1-5]", ""));
         } 
         catch (Exception e)
         {
             util.clear();
-            return MenuPrincipal();
+            return MenuPrincipal("Opção invália!");
         }
         return 0;
     }
@@ -71,7 +72,7 @@ public class Principal
                     if(test.equalsIgnoreCase("s"))
                         listagem.fichaVeiculo(veiculoPlaca);
                     else
-                        MenuPrincipal();
+                        MenuPrincipal("");
                 }
                 break;
 
@@ -90,7 +91,7 @@ public class Principal
                     if(test.equalsIgnoreCase("s"))
                         cadastroVeiculo.saveVeiculo(veiculoPlaca);
                     else
-                        MenuPrincipal();
+                        MenuPrincipal("");
                 }
                 break;
 

@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/view/CadastroVeiculo.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/view/Principal.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/util/Transacional.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/repository/JpaDAO.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/factories/EMFactory.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/repository/ModeloDAO.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/entities/Marca.java</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/META-INF/beans.xml</file>
+            <file>file:/E:/Vitor%20Arquivos%20e%20Programas/Documentos/Projetos%20Java%20Web/ShopCar/ShopCar/src/shopcar/ShopCar.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -27,14 +27,13 @@ public class EMFactory
  
     @Produces 
     @MyDatabase
-    @ApplicationScoped
     public EntityManager createEM()
     {
         return factory.createEntityManager();
     }
     
-    public void closeEntityManager(@Disposes @MyDatabase EntityManager em)
-    {
-        em.close();
-    }
+//    public void closeEntityManager(@Disposes @MyDatabase EntityManager em)
+//    {
+//        em.close();
+//    }
 }

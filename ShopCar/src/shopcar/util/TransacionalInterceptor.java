@@ -1,32 +1,34 @@
 package shopcar.util;
 
-import shopcar.qualifiers.MyDatabase;
 import java.io.Serializable;
-
 import javax.annotation.Priority;
 import javax.inject.Inject;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import javax.interceptor.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import shopcar.qualifiers.MyDatabase;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Interceptor
 @Transacional
-@Priority(Interceptor.Priority.APPLICATION + 1)
 public class TransacionalInterceptor implements Serializable 
 {
     private static final long serialVersionUID = 1L;
-
+    
     @Inject @MyDatabase
     private EntityManager manager;
+    
+    Logger logger = LoggerFactory.getLogger(TransacionalInterceptor.class);
 
     @AroundInvoke
     public Object invoke(InvocationContext context) throws Exception 
     {
+        System.err.println("@@Aquiiii");
         EntityTransaction trx = manager.getTransaction();
+        
         boolean criador = false;
-
+        
         try
         {
             if (!trx.isActive()) 
