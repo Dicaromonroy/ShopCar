@@ -45,6 +45,7 @@ public class CadastroVeiculo
     
     public CadastroVeiculo() { }
     
+    @Transacional
     private void load()
     {
         try

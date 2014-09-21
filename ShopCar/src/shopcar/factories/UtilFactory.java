@@ -47,4 +47,10 @@ public class UtilFactory<T,I>
     {
         return new HashSet<>();
     }
+    
+    @Produces
+    public ThreadLocal<T> createThreadLocal()
+    {
+        return new ThreadLocal<>();
+    }
 }

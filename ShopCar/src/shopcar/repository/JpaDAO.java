@@ -8,6 +8,7 @@ package shopcar.repository;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import shopcar.util.Transacional;
 
@@ -23,6 +24,8 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     private final EntityManager em;
     /* The class to be persist */
     private final Class<T> classe;
+    
+    private ThreadLocal<EntityManager> threadLocal;
    
     /* Builder */
     /**
@@ -35,6 +38,8 @@ public class JpaDAO<T> implements DAO<T>, Serializable
     {
         this.classe = classe;
         this.em = em;
+        threadLocal = new ThreadLocal<>();
+        threadLocal.set(em);
     }
     
     public Class<T> getClasse()

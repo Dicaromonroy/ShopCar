@@ -8,13 +8,12 @@ package shopcar.view;
 
 import java.util.List;
 import javax.inject.Inject;
-import shopcar.entities.Veiculo;
-import shopcar.entities.VeiculoTypes;
+import shopcar.entities.*;
+import shopcar.qualifiers.MyArrayList;
+import shopcar.qualifiers.VeiculosType;
 import shopcar.repository.JpaDAO;
 import shopcar.repository.VeiculoDAO;
-import shopcar.qualifiers.MyArrayList;
 import shopcar.util.Util;
-import shopcar.qualifiers.VeiculosType;
 
 /**
  *
@@ -195,7 +194,7 @@ public class ListagemVeiculo
 //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Ficha do Veículo">
-    public void fichaVeiculo(String placa)
+      public void fichaVeiculo(String placa)
     {
         try
         {
@@ -212,12 +211,23 @@ public class ListagemVeiculo
             System.out.println("| Ano de Fabricação: " + v.getAnoFabricacao());
             System.out.println("| Valor: " + v.getValorVeiculo());
             System.out.println("---------------------------------");
-            System.out.println("| Nº.Chassi: " + v.getChassi());
+            System.out.println("| Chassi: " + v.getChassi());
             System.out.println("| Cilindradas: " + v.getCilindradas());
             System.out.println("| Número de Eixos: " + v.getNumeroEixos());
             System.out.println("| Número de Marchas: " + v.getNumeroMarchas());
             System.out.println("| Potência em CV: " + v.getPotenciaCV());
             System.out.println("| Quilometragemo: " + v.getQuilometragem());
+            
+            if(v instanceof VeiculoPassageiro)
+            {
+                System.out.println("| Número de Assentos: " + ((VeiculoPassageiro)v).getNumAssentos());
+            }
+            
+            if(v instanceof VeiculoTransporte)
+            {
+                System.out.println("| Capacidade Máxima de Carga: " + ((VeiculoTransporte)v).getCapcMaxCarga());
+            }
+            
         }
         catch (Exception e)
         {

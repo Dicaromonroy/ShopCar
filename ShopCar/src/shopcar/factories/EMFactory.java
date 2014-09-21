@@ -8,7 +8,6 @@ package shopcar.factories;
 
 
 import javax.enterprise.context.*;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +26,7 @@ public class EMFactory
  
     @Produces 
     @MyDatabase
+    //@ApplicationScoped
     public EntityManager createEM()
     {
         return factory.createEntityManager();
